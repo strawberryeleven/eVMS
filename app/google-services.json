@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "829780221250",
+    "project_id": "evms-database-dd45c",
+    "storage_bucket": "evms-database-dd45c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829780221250:android:527d5dfcb8696eb4163cdb",
+        "android_client_info": {
+          "package_name": "com.example.evms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0xpLcNI2aE3ACkMdJvH1YLdQJvbiwb7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
