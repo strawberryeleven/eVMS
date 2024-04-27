@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">eVMS</string>
+    <string name="login_as_admin">Login as Admin</string>
 </resources>
