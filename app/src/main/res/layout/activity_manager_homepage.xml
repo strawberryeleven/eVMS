@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".ManagerHomepage">
 
-    <TextView
-        android:id="@+id/textView2"
+
+    <Button
+        android:id="@+id/btn_AddingEmployee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ManagerHomepage"
-        tools:layout_editor_absoluteX="119dp"
-        tools:layout_editor_absoluteY="340dp"
+        android:text="Add New Employee"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="308dp"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
