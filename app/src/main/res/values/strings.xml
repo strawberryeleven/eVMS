@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">eVMS</string>
     <string name="login_as_admin">Login as Admin</string>
+    <string name="login_as_manager">Login as Manager</string>
+    <string name="login_as_employee">Login as Employee</string>
+    <string name="login_as_customer">Login as Customer</string>
+    <string name="new_here_register_as_customer">New Here? Register as Customer!</string>
+    <string name="enter_password">Enter Password:</string>
+    <string name="enter_id">Enter Id:</string>
+    <string name="login">LogIn</string>
+    <string name="enter_manager_id">Enter Manager Id:</string>
 </resources>
