@@ -1,6 +1,7 @@
 package com.example.evms;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -17,6 +18,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class managerAddEmployee extends AppCompatActivity {
 
@@ -48,7 +52,8 @@ public class managerAddEmployee extends AppCompatActivity {
     }
 
     private void showConfirmationDialog() {
-        new AlertDialog.Builder(this)
+        if(validateFields())
+            new AlertDialog.Builder(this)
                 .setTitle("Confirm Addition")
                 .setMessage("Are you sure you want to add this employee?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -65,6 +70,17 @@ public class managerAddEmployee extends AppCompatActivity {
                 .show();
     }
 
+    private boolean validateFields() {
+        if (editTextName.getText().toString().trim().isEmpty() ||
+                editTextEmail.getText().toString().trim().isEmpty() ||
+                editTextPhone.getText().toString().trim().isEmpty() ||
+                editTextSalary.getText().toString().trim().isEmpty() ||
+                editTextManagerId.getText().toString().trim().isEmpty()) {
+            Toast.makeText(this, "Empty field(s). Please fill out all fields.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
     private void validateManagerIdAndAddEmployee() {
         String managerId = editTextManagerId.getText().toString().trim();
         // Check if Manager ID is valid
@@ -101,22 +117,29 @@ public class managerAddEmployee extends AppCompatActivity {
     }
 
     private void addNewEmployee(String employeeId) {
-        Log.d("AddEmployee", "Adding new employee with ID: " + employeeId);
-
         String name = editTextName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String phone = editTextPhone.getText().toString().trim();
         String salary = editTextSalary.getText().toString().trim();
         String managerId = editTextManagerId.getText().toString().trim();
 
-        // Build the employee object
-        Employee employee = new Employee(employeeId, name, email, phone, salary, "123", managerId);
+        // Notice the field names are all lowercase to match the working document
+        Map<String, Object> employee = new HashMap<>();
+        employee.put("EmployeeID", employeeId);
+        employee.put("ManagerID", managerId);
+        employee.put("Name", name);
+        employee.put("email", email);
+        employee.put("password", "123");
+        employee.put("phoneNumber", phone);
+        employee.put("salary", salary); // Assuming salary is stored as a String
+
 
         // Add a new document with the generated ID
         db.collection("Employees").document(employeeId).set(employee)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(managerAddEmployee.this, "Employee added successfully.", Toast.LENGTH_SHORT).show();
                     Log.d("AddEmployee", "Employee added successfully");
+                    redirectToAdminHomepage();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(managerAddEmployee.this, "Error adding employee: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -124,18 +147,27 @@ public class managerAddEmployee extends AppCompatActivity {
                 });
     }
 
-    class Employee {
-        public String EmployeeID, Name, Email, PhoneNumber, Salary, Password, ManagedBy;
+
+    private void redirectToAdminHomepage() {
+        // Redirect to the admin homepage. Adjust this if you have a different activity for the homepage.
+        Intent intent = new Intent(managerAddEmployee.this, ManagerHomepage.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+    static class Employee {
+        public String EmployeeID, Name, Email, PhoneNumber, Salary, Password, ManagerID;
 
         public Employee() {}
-        public Employee(String employeeID, String name, String email, String phoneNumber, String salary, String password, String managedBy) {
+        public Employee(String employeeID, String name, String email, String phoneNumber, String salary, String password, String managerID) {
             EmployeeID = employeeID;
             Name = name;
             Email = email;
             PhoneNumber = phoneNumber;
             Salary = salary;
             Password = password;
-            ManagedBy = managedBy;
+            ManagerID = managerID;
         }
 
         // Getters and setters if needed
