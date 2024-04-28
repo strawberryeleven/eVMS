@@ -20,6 +20,7 @@
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintVertical_chainStyle="packed" />
 
+
     <EditText
         android:id="@+id/text_employeeID"
         android:layout_width="0dp"
