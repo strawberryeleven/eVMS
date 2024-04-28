@@ -15,6 +15,9 @@
         android:theme="@style/Theme.EVMS"
         tools:targetApi="31">
         <activity
+            android:name=".adminHomepage"
+            android:exported="false" />
+        <activity
             android:name=".registerCustomer"
             android:exported="false" />
         <activity
@@ -38,7 +41,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Ensure MainActivity is either properly configured or removed if not used -->
     </application>
 
 </manifest>

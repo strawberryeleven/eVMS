@@ -1,7 +1,11 @@
 package com.example.evms;
 
+import android.content.Intent;
 import android.os.Bundle;
-
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -10,15 +14,49 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class loginAdmin extends AppCompatActivity {
 
+    private EditText adminIdEditText;
+    private EditText passwordEditText;
+    private Button loginButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_admin);
+        setupInsets();
+
+        adminIdEditText = findViewById(R.id.text_adminID);
+        passwordEditText = findViewById(R.id.text_adminPassword);
+        loginButton = findViewById(R.id.btn_adminLoggedIn);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                performLogin();
+            }
+        });
+    }
+
+    private void setupInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private void performLogin() {
+        String adminId = adminIdEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        if (adminId.equals("admin1") && password.equals("wyne123")) {
+            Toast.makeText(loginAdmin.this, "Login Successful", Toast.LENGTH_SHORT).show();
+            // Intent to navigate to admin home page
+            Intent intent = new Intent(loginAdmin.this, adminHomepage.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(loginAdmin.this, "Invalid ID or Password", Toast.LENGTH_LONG).show();
+        }
     }
 }
