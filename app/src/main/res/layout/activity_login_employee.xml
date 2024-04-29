@@ -5,21 +5,36 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".loginEmployee">
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    tools:context=".loginEmployee"
+    tools:ignore="ExtraText">
+
+    <TextView
+        android:id="@+id/text_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="eVMS"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="130dp" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/enter_employee_id"
-        app:layout_constraintBottom_toTopOf="@+id/text_employeeID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/text_app_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        app:layout_constraintVertical_chainStyle="packed" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="16dp" />
 
     <EditText
         android:id="@+id/text_employeeID"
@@ -27,18 +42,21 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/enter_password"
+        app:layout_constraintTop_toBottomOf="@+id/text_employeeID"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_employeeID" />
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="16dp" />
 
     <EditText
         android:id="@+id/text_employeePassword"
@@ -46,20 +64,21 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/btn_employeeLoggedIn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/login"
+        app:layout_constraintTop_toBottomOf="@+id/text_employeePassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_employeePassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
