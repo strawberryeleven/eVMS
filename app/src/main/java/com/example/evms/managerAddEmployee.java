@@ -123,7 +123,6 @@ public class managerAddEmployee extends AppCompatActivity {
         String salary = editTextSalary.getText().toString().trim();
         String managerId = editTextManagerId.getText().toString().trim();
 
-        // Notice the field names are all lowercase to match the working document
         Map<String, Object> employee = new HashMap<>();
         employee.put("EmployeeID", employeeId);
         employee.put("ManagerID", managerId);
