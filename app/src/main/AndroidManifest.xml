@@ -30,6 +30,9 @@
             android:name=".EmployeeHomepage"
             android:exported="false" />
         <activity
+            android:name=".UpdateCustomerRecords"
+            android:exported="false" />
+        <activity
             android:name=".ManagerHomepage"
             android:exported="false" />
         <activity
