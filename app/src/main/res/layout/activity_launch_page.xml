@@ -7,6 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".launchPage">
 
+    <!-- Add ImageView for logo -->
+
+    <!-- Existing Buttons and TextView -->
+
+    <TextView
+        android:id="@+id/text_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="eVMS"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="130dp" />
+
     <Button
         android:id="@+id/btn_admin"
         android:layout_width="0dp"
@@ -14,7 +31,7 @@
         android:text="@string/login_as_admin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_app_name"
         app:layout_constraintBottom_toTopOf="@id/btn_manager"
         app:layout_constraintVertical_chainStyle="packed"/>
 

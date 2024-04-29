@@ -18,4 +18,5 @@
     <string name="enter_name">Enter Name:</string>
     <string name="sign_up">Sign Up</string>
     <string name="log_in">Log In</string>
+    <string name="appoint_as_manager">Appoint as Manager</string>
 </resources>
