@@ -85,7 +85,7 @@ public class managerAddEmployee extends AppCompatActivity {
         String managerId = editTextManagerId.getText().toString().trim();
         // Check if Manager ID is valid
         db.collection("Manager")
-                .whereEqualTo("ManagerID", managerId)
+                .whereEqualTo("ManagerID", managerId) // Use the correct field name as per your schema
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
@@ -94,7 +94,7 @@ public class managerAddEmployee extends AppCompatActivity {
                         Toast.makeText(managerAddEmployee.this, "Invalid Manager ID.", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(e -> Toast.makeText(managerAddEmployee.this, "Failed to validate Manager ID.", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Log.e("AddEmployee", "Failed to validate Manager ID", e));
     }
 
     private void generateEmployeeIdAndAdd() {
@@ -125,7 +125,7 @@ public class managerAddEmployee extends AppCompatActivity {
 
         Map<String, Object> employee = new HashMap<>();
         employee.put("EmployeeID", employeeId);
-        employee.put("ManagerID", managerId);
+        employee.put("ManagedBy", managerId);
         employee.put("Name", name);
         employee.put("email", email);
         employee.put("password", "123");
@@ -152,23 +152,5 @@ public class managerAddEmployee extends AppCompatActivity {
         Intent intent = new Intent(managerAddEmployee.this, ManagerHomepage.class);
         startActivity(intent);
         finish();
-    }
-
-
-    static class Employee {
-        public String EmployeeID, Name, Email, PhoneNumber, Salary, Password, ManagerID;
-
-        public Employee() {}
-        public Employee(String employeeID, String name, String email, String phoneNumber, String salary, String password, String managerID) {
-            EmployeeID = employeeID;
-            Name = name;
-            Email = email;
-            PhoneNumber = phoneNumber;
-            Salary = salary;
-            Password = password;
-            ManagerID = managerID;
-        }
-
-        // Getters and setters if needed
     }
 }
