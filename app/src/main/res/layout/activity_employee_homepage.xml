@@ -6,28 +6,37 @@
     tools:context=".EmployeeHomepage">
 
     <!-- Top Bar with Title -->
+
+    <!-- Update Customer Records Button -->
     <TextView
         android:id="@+id/tvEmployeeDashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="0dp"
         android:background="#FFF8E1"
+        android:padding="16dp"
         android:text="Employee Dashboard"
         android:textAlignment="center"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:padding="16dp"/>
+        android:textStyle="bold" />
 
-    <!-- Update Customer Records Button -->
+    <!-- Update Service Records Button -->
     <Button
         android:id="@+id/btnUpdateCustomerRecords"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvEmployeeDashboard"
-        android:text="Update Customer Records"
+        android:layout_below="@+id/tvEmployeeDashboard"
         android:layout_margin="8dp"
-        android:padding="16dp"/>
+        android:layout_marginTop="21dp"
+        android:layout_marginBottom="8dp"
+        android:padding="16dp"
+        android:text="Update Customer Records" />
 
-    <!-- Update Service Records Button -->
     <Button
         android:id="@+id/btnUpdateServiceRecords"
         android:layout_width="match_parent"
@@ -43,8 +52,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnUpdateServiceRecords"
-        android:text="Generate Gate Pass"
         android:layout_margin="8dp"
-        android:padding="16dp"/>
+        android:layout_marginTop="250dp"
+        android:layout_marginBottom="8dp"
+        android:padding="16dp"
+        android:text="Generate Gate Pass" />
 
 </RelativeLayout>

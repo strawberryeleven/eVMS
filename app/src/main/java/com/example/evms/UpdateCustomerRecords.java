@@ -3,6 +3,8 @@ package com.example.evms;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,56 +20,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 class SearchableCustomer extends Customer {
-    // Constructor that mirrors the superclass
     public SearchableCustomer(String CustomerID, String Name, String Email, String Password, String phoneNumber) {
         super(CustomerID, Name, Email, Password, phoneNumber);
     }
 
-    // Additional method to support searching
-    public boolean matchesSearch(String searchText) {
+    public boolean matchesSearch(String searchText, String field) {
         searchText = searchText.toLowerCase();
-        return getCustomerID().toLowerCase().contains(searchText) ||
-                getName().toLowerCase().contains(searchText) ||
-                getEmail().toLowerCase().contains(searchText) ||
-                getPhoneNumber().toLowerCase().contains(searchText);
+        switch (field) {
+            case "CustomerID":
+                return getCustomerID().toLowerCase().contains(searchText);
+            case "Name":
+                return getName().toLowerCase().contains(searchText);
+            case "Email":
+                return getEmail().toLowerCase().contains(searchText);
+            case "PhoneNumber":
+                return getPhoneNumber().toLowerCase().contains(searchText);
+            default:
+                return false;
+        }
+    }
+
+    public String getField(String field) {
+        switch (field) {
+            case "CustomerID":
+                return getCustomerID();
+            case "Name":
+                return getName();
+            case "Email":
+                return getEmail();
+            case "PhoneNumber":
+                return getPhoneNumber();
+            default:
+                return "";
+        }
     }
 }
 
 public class UpdateCustomerRecords extends AppCompatActivity {
 
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Spinner filterSpinner;
     private ArrayAdapter<String> customerListAdapter;
-    private final List<SearchableCustomer> fullCustomerList = new ArrayList<>();
-    private final List<String> customerDisplayList = new ArrayList<>();
+    private List<SearchableCustomer> fullCustomerList = new ArrayList<>();
+    private List<String> customerDisplayList = new ArrayList<>();
 
-    private EditText etCustomerId, etEmail, etName, etPassword, etPhoneNumber;
+    private EditText etSearchField;
+    private String currentSearchField = "Name"; // Default search field
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_customer_records);
 
-        // Initialize components with their IDs
-        // Changed to EditText as per layout
-        EditText searchField = findViewById(R.id.searchField);
+        etSearchField = findViewById(R.id.searchField);
         filterSpinner = findViewById(R.id.filterSpinner);
         ListView customerListView = findViewById(R.id.customerListView);
-        etCustomerId = findViewById(R.id.etCustomerId);
-        etEmail = findViewById(R.id.etEmail);
-        etName = findViewById(R.id.etName);
-        etPassword = findViewById(R.id.etPassword);
-        etPhoneNumber = findViewById(R.id.etPhoneNumber);
-        Button confirmEditButton = findViewById(R.id.confirmEditButton);
 
-        // Set up ListView and adapters
         customerListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, customerDisplayList);
         customerListView.setAdapter(customerListAdapter);
 
         setUpFilterSpinner();
         fetchAllCustomers();
 
-        searchField.addTextChangedListener(new TextWatcher() {
+        etSearchField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
@@ -80,11 +95,21 @@ public class UpdateCustomerRecords extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
-        confirmEditButton.setOnClickListener(v -> saveCustomerChanges());
+        filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                currentSearchField = parent.getItemAtPosition(position).toString();
+                searchCustomer(etSearchField.getText().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
     }
 
     private void fetchAllCustomers() {
-        db.collection("customers").get().addOnCompleteListener(task -> {
+        db.collection("Customers").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 fullCustomerList.clear();
                 customerDisplayList.clear();
@@ -97,9 +122,8 @@ public class UpdateCustomerRecords extends AppCompatActivity {
                             document.getString("phoneNumber")
                     );
                     fullCustomerList.add(customer);
-                    customerDisplayList.add(customer.getName()); // Or other details as needed
                 }
-                customerListAdapter.notifyDataSetChanged();
+                searchCustomer(etSearchField.getText().toString());
             }
         });
     }
@@ -114,28 +138,10 @@ public class UpdateCustomerRecords extends AppCompatActivity {
     private void searchCustomer(String searchText) {
         customerDisplayList.clear();
         for (SearchableCustomer customer : fullCustomerList) {
-            if (customer.matchesSearch(searchText)) {
-                customerDisplayList.add(customer.getName()); // Adjust based on display preferences
+            if (customer.matchesSearch(searchText, currentSearchField)) {
+                customerDisplayList.add(customer.getField(currentSearchField));
             }
         }
         customerListAdapter.notifyDataSetChanged();
-    }
-
-    private void saveCustomerChanges() {
-        String customerId = etCustomerId.getText().toString();
-        db.collection("customers").document(customerId)
-                .update(
-                        "CustomerID", etCustomerId.getText().toString(),
-                        "Email", etEmail.getText().toString(),
-                        "Name", etName.getText().toString(),
-                        "Password", etPassword.getText().toString(),
-                        "PhoneNumber", etPhoneNumber.getText().toString()
-                )
-                .addOnSuccessListener(aVoid -> {
-                    // Confirmation of success, e.g., Toast
-                })
-                .addOnFailureListener(e -> {
-                    // Handle the error
-                });
     }
 }
