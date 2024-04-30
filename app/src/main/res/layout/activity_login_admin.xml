@@ -8,56 +8,74 @@
     tools:context=".loginAdmin">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/text_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="eVMS"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="100dp" />
+
+    <TextView
+        android:id="@+id/text_app_subtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="Admin Login"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/text_app_name"
+        app:layout_constraintTop_toBottomOf="@+id/text_app_name" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/enter_id"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        app:cardCornerRadius="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/text_adminID"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintVertical_bias="0.5"/>
-
-    <EditText
-        android:id="@+id/text_adminID"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/enter_password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_adminID" />
-
-    <EditText
-        android:id="@+id/text_adminPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <Button
-        android:id="@+id/btn_adminLoggedIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_adminPassword"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"/>
+        app:layout_constraintVertical_bias="0.5">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/text_adminID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:hint="Enter Admin ID"
+                android:inputType="text"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/text_adminPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:hint="Enter Password"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/btn_adminLoggedIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textColor="@android:color/white"
+                android:padding="16dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

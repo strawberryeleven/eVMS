@@ -19,4 +19,10 @@
     <string name="sign_up">Sign Up</string>
     <string name="log_in">Log In</string>
     <string name="appoint_as_manager">Appoint as Manager</string>
+    <string name="type_label">Type</string>
+    <string name="type_hint">Enter type</string>
+    <string name="price_label">Price</string>
+    <string name="price_hint">Enter Price</string>
+    <string name="add_service_button_label">Add Service</string>
+    <string name="descriptionField">Add Description for the Service</string>
 </resources>
