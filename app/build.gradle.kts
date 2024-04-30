@@ -41,6 +41,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation ("com.squareup.picasso:picasso:2.71828")
+
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
     implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
 
     implementation("com.google.firebase:firebase-analytics")

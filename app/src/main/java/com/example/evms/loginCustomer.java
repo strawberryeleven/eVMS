@@ -50,6 +50,7 @@ public class loginCustomer extends AppCompatActivity {
                         // Authentication successful
                         Toast.makeText(loginCustomer.this, "Login successful!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(loginCustomer.this, customerHomepage.class);
+                        intent.putExtra("customerEmail", email); // Pass email to customerHomepage
                         startActivity(intent);
                         finish();
                     } else {
