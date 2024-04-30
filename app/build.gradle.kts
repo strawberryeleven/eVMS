@@ -41,6 +41,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.google.firebase:firebase-storage")
 
     implementation ("com.squareup.picasso:picasso:2.71828")
 
@@ -51,4 +52,6 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
 
     implementation ("com.google.firebase:firebase-firestore:24.10.0")
+
+    implementation ("com.github.esafirm:android-image-picker:2.4.5")
 }
