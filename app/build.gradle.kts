@@ -54,4 +54,5 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore:24.10.0")
 
     implementation ("com.github.esafirm:android-image-picker:2.4.5")
+
 }
