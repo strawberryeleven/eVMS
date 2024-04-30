@@ -48,6 +48,12 @@
             android:exported="false"
             android:windowSoftInputMode="adjustNothing"/>
         <activity
+            android:name=".UpdateServiceRecords"
+            android:exported="false" />
+        <activity
+            android:name=".CompleteService"
+            android:exported="false" />
+        <activity
             android:name=".ManagerHomepage"
             android:exported="false" />
         <activity

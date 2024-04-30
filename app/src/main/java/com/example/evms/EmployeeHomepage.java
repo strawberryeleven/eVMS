@@ -37,7 +37,8 @@ public class EmployeeHomepage extends AppCompatActivity {
         btnUpdateServiceRecords.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Start the Update Service Records Activity or Fragment
+                Intent intent = new Intent(EmployeeHomepage.this, UpdateServiceRecords.class);
+                startActivity(intent);
             }
         });
 
