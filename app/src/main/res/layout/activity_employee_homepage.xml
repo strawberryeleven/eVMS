@@ -7,14 +7,73 @@
     android:layout_height="match_parent"
     tools:context=".EmployeeHomepage">
 
+    <TextView
+        android:id="@+id/tvEmployeeDashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="0dp"
+        android:background="#FFF8E1"
+        android:padding="16dp"
+        android:text="Employee Dashboard"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Update Customer Records Button -->
+    <Button
+        android:id="@+id/btnUpdateCustomerRecords"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:padding="16dp"
+        android:text="Update Customer Records"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmployeeDashboard" />
+
+    <!-- Update Service Records Button -->
+    <Button
+        android:id="@+id/btnUpdateServiceRecords"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:padding="16dp"
+        android:text="Update Service Records"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdateCustomerRecords" />
+
+    <!-- Generate Gate Pass Button -->
+    <Button
+        android:id="@+id/btnGenerateGatePass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:padding="16dp"
+        android:text="Generate Gate Pass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdateServiceRecords" />
+
+    <!-- Scan Number Plate Button -->
     <Button
         android:id="@+id/scanButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
         android:text="Scan Number Plate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnGenerateGatePass" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

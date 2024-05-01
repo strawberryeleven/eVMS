@@ -64,6 +64,16 @@
             android:name=".EmployeeHomepage"
             android:exported="false" />
         <activity
+            android:name=".UpdateCustomerRecords"
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing"/>
+        <activity
+            android:name=".UpdateServiceRecords"
+            android:exported="false" />
+        <activity
+            android:name=".CompleteService"
+            android:exported="false" />
+        <activity
             android:name=".ManagerHomepage"
             android:exported="false" />
         <activity
@@ -97,6 +107,7 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
     </application>
 
 </manifest>

@@ -3,4 +3,31 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="header_background_color">#FFFFFFFF</color>
+
+    <!-- Primary brand colors -->
+    <color name="colorPrimary">#455A64</color> <!-- Steel Grey -->
+    <color name="colorPrimaryVariant">#37474F</color> <!-- Dark Steel Grey -->
+    <color name="colorOnPrimary">#FFFFFF</color> <!-- White -->
+
+    <!-- Secondary brand colors -->
+    <color name="colorSecondary">#4169E1</color> <!-- Royal Blue -->
+    <color name="colorSecondaryVariant">#1E90FF</color> <!-- Lighter Royal Blue -->
+    <color name="colorOnSecondary">#FFFFFF</color> <!-- White -->
+
+    <!-- Background colors -->
+    <color name="background_dark">#1B1B1B</color> <!-- Dark Background -->
+    <color name="background_light">#FFFFFF</color> <!-- Light Background -->
+
+    <!-- Text colors -->
+    <color name="text_primary">#000000</color> <!-- Black text on light background -->
+    <color name="text_secondary">#FFFFFF</color> <!-- White text on dark background -->
+
+    <!-- Card color -->
+    <color name="card_color">#37474F</color> <!-- Dark Grey for card backgrounds -->
+
+    <!-- Hint text color -->
+    <color name="hint_text_color">#80FFFFFF</color> <!-- Semi-transparent white for hint text -->
+
+    <!-- Button primary color -->
+    <color name="button_primary">#1E90FF</color> <!-- Your button primary color -->
 </resources>
