@@ -3,15 +3,15 @@ package com.example.evms;
 import com.google.firebase.Timestamp;
 
 public class Manager {
-    private String EmployeeID;
+    private String oldEmployeeId;
     private String ManagerID;
     private String Salary;
     private String password;
     private Timestamp dateAppointed;
 
     // Constructor with parameters
-    public Manager(String EmployeeID, String ManagerID, String Salary, String password, Timestamp dateAppointed) {
-        this.EmployeeID = EmployeeID;
+    public Manager(String oldEmployeeId, String ManagerID, String Salary, String password, Timestamp dateAppointed) {
+        this.oldEmployeeId = oldEmployeeId;
         this.ManagerID = ManagerID;
         this.Salary = Salary;
         this.password = password;
@@ -19,8 +19,14 @@ public class Manager {
     }
 
     // Getters and Setters
-    public String getEmployeeID() { return EmployeeID; }
-    public void setEmployeeID(String EmployeeID) { this.EmployeeID = EmployeeID; }
+    // Correctly named getter and setter for the oldEmployeeId
+    public String getOldEmployeeId() {
+        return oldEmployeeId;
+    }
+
+    public void setOldEmployeeId(String oldEmployeeId) {
+        this.oldEmployeeId = oldEmployeeId;
+    }
     public String getManagerID() { return ManagerID; }
     public void setManagerID(String ManagerID) { this.ManagerID = ManagerID; }
     public String getSalary() { return Salary; }
@@ -31,6 +37,5 @@ public class Manager {
     public void setDateAppointed(Timestamp dateAppointed) { this.dateAppointed = dateAppointed; }
 
     // Empty constructor needed for Firestore
-    public Manager() {
-    }
+    public Manager() {    }
 }
