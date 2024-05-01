@@ -60,8 +60,6 @@ public class customerSearchService extends AppCompatActivity {
         resultStatement.setVisibility(View.GONE);
     }
 
-
-
     private void performSearch(String searchQuery) {
         db.collection("Service")
                 .whereEqualTo("ServiceType", searchQuery)

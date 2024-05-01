@@ -1,5 +1,7 @@
 package com.example.evms;
 
+import com.google.firebase.Timestamp;
+
 public class Service {
     private String DateOfCreation;
     private String ImageUrl;
@@ -65,5 +67,10 @@ public class Service {
 
     public void setServiceRating(String serviceRating) {
         this.ServiceRating = serviceRating;
+    }
+
+
+    public void setDateOfCreation(String dateOfCreation) {
+        DateOfCreation = dateOfCreation;
     }
 }

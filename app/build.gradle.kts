@@ -54,4 +54,14 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore:24.10.0")
 
     implementation ("com.github.esafirm:android-image-picker:2.4.5")
+
+    implementation ("com.google.firebase:firebase-database:20.0.3") // Use the latest version available
+
+    implementation ("com.google.android.gms:play-services-vision:19.0.0")
+
+    implementation ("com.github.yalantis:ucrop:2.2.8-native")
+
+    implementation ("androidx.appcompat:appcompat:1.4.1")
+
+
 }
