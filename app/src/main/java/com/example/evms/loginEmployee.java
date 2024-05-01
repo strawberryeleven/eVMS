@@ -13,16 +13,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.Objects;
 
 public class loginEmployee extends AppCompatActivity {
 
     private EditText textEmployeeId;
     private EditText textEmployeePassword;
-    private Button btnEmployeeLogin;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,46 +35,38 @@ public class loginEmployee extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize components
         textEmployeeId = findViewById(R.id.text_employeeID);
         textEmployeePassword = findViewById(R.id.text_employeePassword);
-        btnEmployeeLogin = findViewById(R.id.btn_employeeLoggedIn);
-
-        // Set up click listener for the login button
+        Button btnEmployeeLogin = findViewById(R.id.btn_employeeLoggedIn);
         btnEmployeeLogin.setOnClickListener(v -> attemptEmployeeLogin());
     }
 
     private void attemptEmployeeLogin() {
-        // Get input text
         String employeeId = textEmployeeId.getText().toString().trim();
         String employeePassword = textEmployeePassword.getText().toString().trim();
 
-        // Simple validation
         if (employeeId.isEmpty() || employeePassword.isEmpty()) {
             Toast.makeText(this, "Employee ID and password cannot be empty.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Query the Employees collection
         db.collection("Employees")
                 .whereEqualTo("EmployeeID", employeeId)
-                .whereEqualTo("password", employeePassword) // Note: Storing passwords in plain text is insecure
+                .whereEqualTo("password", employeePassword)
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        if (!task.getResult().isEmpty()) {
-                            // Login successful, redirect to the Employee Homepage
-                            Intent intent = new Intent(loginEmployee.this, EmployeeHomepage.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            // Login failed, invalid credentials
-                            Toast.makeText(this, "Invalid EmployeeID or Password.", Toast.LENGTH_SHORT).show();
-                        }
+                    if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
+                        // Employee found, prepare to send data
+                        DocumentSnapshot document = task.getResult().getDocuments().get(0); // Corrected to use DocumentSnapshot
+                        Intent intent = new Intent(loginEmployee.this, EmployeeHomepage.class);
+                        Objects.requireNonNull(document.getData()).forEach((key, value) -> {
+                            intent.putExtra(key, value.toString());  // Assumes all values are suitable for passing as Strings
+                        });
+                        startActivity(intent);
+                        finish();
                     } else {
-                        // Error with Firestore operation
-                        Toast.makeText(this, "Error logging in. Please try again.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Invalid EmployeeID or Password.", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }).addOnFailureListener(e -> Toast.makeText(this, "Error logging in. Please try again.", Toast.LENGTH_SHORT).show());
     }
 }

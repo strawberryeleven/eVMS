@@ -68,7 +68,7 @@ class SearchableCustomer extends Customer {
 
 public class UpdateCustomerRecords extends AppCompatActivity {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Spinner filterSpinner;
     private ArrayAdapter<String> customerListAdapter;
     private List<SearchableCustomer> fullCustomerList = new ArrayList<>();
@@ -77,7 +77,6 @@ public class UpdateCustomerRecords extends AppCompatActivity {
     private EditText etSearchField;
     private String currentSearchField = "Name"; // Default search field
 
-    private LinearLayout customerInfoLayout;
     private EditText etEmail, etName, etCustomerId, etPassword, etPhoneNumber;
 
     private Button confirmEditButton;
@@ -90,7 +89,7 @@ public class UpdateCustomerRecords extends AppCompatActivity {
         etSearchField = findViewById(R.id.searchField);
         filterSpinner = findViewById(R.id.filterSpinner);
         ListView customerListView = findViewById(R.id.customerListView);
-        customerInfoLayout = findViewById(R.id.customerInfoLayout);
+        LinearLayout customerInfoLayout = findViewById(R.id.customerInfoLayout);
         etEmail = findViewById(R.id.etEmail);
         etName = findViewById(R.id.etName);
         etCustomerId = findViewById(R.id.etCustomerId);
@@ -161,9 +160,7 @@ public class UpdateCustomerRecords extends AppCompatActivity {
             etPhoneNumber.setText(currentSelectedCustomer.getPhoneNumber());
         });
 
-        confirmEditButton.setOnClickListener(v -> {
-            updateCustomerInDatabase();
-        });
+        confirmEditButton.setOnClickListener(v -> updateCustomerInDatabase());
     }
 
     private boolean validateInputs() {
@@ -175,10 +172,7 @@ public class UpdateCustomerRecords extends AppCompatActivity {
         if (!etEmail.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
             return false;
         }
-        if (!etPhoneNumber.getText().toString().matches("^[+]?[0-9]{10,13}$")) {
-            return false;
-        }
-        return true;
+        return etPhoneNumber.getText().toString().matches("^[+]?[0-9]{10,13}$");
     }
     private void updateCustomerInDatabase() {
         if (currentSelectedCustomer != null) {

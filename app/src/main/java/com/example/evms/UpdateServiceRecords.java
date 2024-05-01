@@ -14,20 +14,23 @@ import java.util.List;
 
 public class UpdateServiceRecords extends AppCompatActivity {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private ListView listViewPendingServices;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayAdapter<String> adapter;
     private List<String> servicesList = new ArrayList<>();
     private List<QueryDocumentSnapshot> documents = new ArrayList<>();
+    private String employeeId;  // Variable to store EmployeeID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_service_records);
-        listViewPendingServices = findViewById(R.id.listViewPendingServices);
+        ListView listViewPendingServices = findViewById(R.id.listViewPendingServices);
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, servicesList);
         listViewPendingServices.setAdapter(adapter);
+
+        // Retrieve EmployeeID from the intent extras
+        employeeId = getIntent().getStringExtra("EmployeeID");
 
         fetchPendingServices();
 
@@ -35,7 +38,7 @@ public class UpdateServiceRecords extends AppCompatActivity {
             Intent intent = new Intent(UpdateServiceRecords.this, CompleteService.class);
             QueryDocumentSnapshot selectedService = documents.get(position);
             intent.putExtra("ServiceID", selectedService.getString("ServiceID"));
-            intent.putExtra("EmployeeID", "E001"); // Assuming EmployeeID is known or static in this context
+            intent.putExtra("EmployeeID", employeeId);
             intent.putExtra("NumberPlate", selectedService.getString("NumberPlate"));
             intent.putExtra("MaintenanceDate", selectedService.getString("MaintenanceDate"));
             startActivity(intent);
@@ -48,12 +51,23 @@ public class UpdateServiceRecords extends AppCompatActivity {
                 documents.clear(); // Clear previous data
                 servicesList.clear();
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    documents.add(document); // Save the document snapshot for later use
-                    String serviceInfo = "Service ID: " + document.getString("ServiceID") +
-                            "\nCustomer Email: " + document.getString("CustomerEmail") +
-                            "\nMaintenance Date: " + document.getString("MaintenanceDate") +
-                            "\nNumber Plate: " + document.getString("NumberPlate");
-                    servicesList.add(serviceInfo);
+                    String serviceId = document.getString("ServiceID");
+                    String customerEmail = document.getString("CustomerEmail");
+                    String maintenanceDate = document.getString("MaintenanceDate");
+                    String numberPlate = document.getString("NumberPlate");
+
+                    if (serviceId != null && !serviceId.isEmpty() &&
+                            customerEmail != null && !customerEmail.isEmpty() &&
+                            maintenanceDate != null && !maintenanceDate.isEmpty() &&
+                            numberPlate != null && !numberPlate.isEmpty()) {
+
+                        documents.add(document);
+                        String serviceInfo = "Service ID: " + serviceId +
+                                "\nCustomer Email: " + customerEmail +
+                                "\nMaintenance Date: " + maintenanceDate +
+                                "\nNumber Plate: " + numberPlate;
+                        servicesList.add(serviceInfo);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             } else {
