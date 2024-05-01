@@ -29,26 +29,22 @@ class SearchableCustomer extends Customer {
     }
 
     public boolean matchesSearch(String searchText, String field) {
-        if (searchText == null) {
-            return false;
-        }
         searchText = searchText.toLowerCase();
         switch (field) {
             case "CustomerID":
-                return getCustomerID() != null && getCustomerID().toLowerCase().contains(searchText);
+                return getCustomerID().toLowerCase().contains(searchText);
             case "Name":
-                return getName() != null && getName().toLowerCase().contains(searchText);
+                return getName().toLowerCase().contains(searchText);
             case "Email":
-                return getEmail() != null && getEmail().toLowerCase().contains(searchText);
+                return getEmail().toLowerCase().contains(searchText);
             case "PhoneNumber":
-                return getPhoneNumber() != null && getPhoneNumber().toLowerCase().contains(searchText);
-            case "Password":
-                return getPassword() != null && getPassword().toLowerCase().contains(searchText);
+                return getPhoneNumber().toLowerCase().contains(searchText);
+            case "Password":  // Add case for Password
+                return getPassword().toLowerCase().contains(searchText);
             default:
                 return false;
         }
     }
-
 
 
     public String getField(String field) {
@@ -164,8 +160,16 @@ public class UpdateCustomerRecords extends AppCompatActivity {
             etPhoneNumber.setText(currentSelectedCustomer.getPhoneNumber());
         });
 
-        confirmEditButton.setOnClickListener(v -> updateCustomerInDatabase());
+        confirmEditButton.setOnClickListener(v -> {
+            if (validateInputs()) {
+                updateCustomerInDatabase();
+            } else {
+                Toast.makeText(UpdateCustomerRecords.this, "Please check the inputs. Make sure all fields are filled and valid.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
+
 
     private boolean validateInputs() {
         if (etEmail.getText().toString().isEmpty() || etName.getText().toString().isEmpty() ||
@@ -174,10 +178,16 @@ public class UpdateCustomerRecords extends AppCompatActivity {
             return false;
         }
         if (!etEmail.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
+            Toast.makeText(UpdateCustomerRecords.this, "Invalid email format", Toast.LENGTH_SHORT).show();
             return false;
         }
-        return etPhoneNumber.getText().toString().matches("^[+]?[0-9]{10,13}$");
+        if (!etPhoneNumber.getText().toString().matches("^[+]?[0-9]{10,13}$")) {
+            Toast.makeText(UpdateCustomerRecords.this, "Invalid phone number format", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
+
     private void updateCustomerInDatabase() {
         if (currentSelectedCustomer != null) {
             String customerID = currentSelectedCustomer.getCustomerID();

@@ -1,6 +1,7 @@
 package com.example.evms;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class ManagerAdapter extends RecyclerView.Adapter<ManagerAdapter.ManagerV
     public ManagerAdapter(Context context, List<Manager> managersList) {
         this.context = context;
         this.managersList = managersList;
-        fetchEmployeeDetails();
+        fetchEmployeeDetails();  // Trigger fetching and counting here, but ensure data is ready before using it
     }
 
     @NonNull
@@ -43,7 +44,12 @@ public class ManagerAdapter extends RecyclerView.Adapter<ManagerAdapter.ManagerV
         holder.managerID.setText(manager.getManagerID());
         holder.salary.setText(manager.getSalary());
         holder.name.setText(employeeNames.getOrDefault(manager.getOldEmployeeId(), "N/A"));
-        holder.numberOfEmployees.setText(String.valueOf(employeeCounts.getOrDefault(manager.getManagerID(), 0)));
+        Integer count = employeeCounts.get(manager.getManagerID()); // Safely retrieve count
+        if (count != null) {
+            holder.numberOfEmployees.setText(String.valueOf(count));
+        } else {
+            holder.numberOfEmployees.setText("0"); // Default to 0 if not found
+        }
     }
 
     @Override
@@ -55,22 +61,20 @@ public class ManagerAdapter extends RecyclerView.Adapter<ManagerAdapter.ManagerV
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Employees").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                employeeNames.clear();
+                employeeCounts.clear();
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Employee employee = document.toObject(Employee.class);
                     employeeNames.put(employee.getEmployeeID(), employee.getName());
-
-                    // Increment count of employees managed by each manager
                     String managedBy = employee.getManagedBy();
-                    if (managedBy != null && !managedBy.isEmpty()) {
+                    if (managedBy != null) {
                         int count = employeeCounts.getOrDefault(managedBy, 0);
                         employeeCounts.put(managedBy, count + 1);
                     }
                 }
-                // Sort the manager list by ID
-                Collections.sort(managersList, Comparator.comparing(Manager::getManagerID));
-                notifyDataSetChanged();
+                notifyDataSetChanged();  // Ensure this is called after all data is ready
             } else {
-                // Handle failure
+                Log.e("ManagerAdapter", "Failed to fetch employee details: ", task.getException());
             }
         });
     }
@@ -87,3 +91,4 @@ public class ManagerAdapter extends RecyclerView.Adapter<ManagerAdapter.ManagerV
         }
     }
 }
+

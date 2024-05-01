@@ -5,43 +5,65 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_dark"
     tools:context=".loginAdmin">
 
-    <TextView
-        android:id="@+id/text_app_name"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:layout_height="wrap_content"
-        android:text="eVMS"
-        android:textSize="48sp"
-        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="100dp" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/text_app_subtext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:text="Admin Login"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/text_app_name"
-        app:layout_constraintTop_toBottomOf="@+id/text_app_name" />
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="45dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="&lt;"
+            android:padding="8dp"
+            android:textSize="24sp"
+            android:textColor="@color/text_primary"
+            android:backgroundTint="@color/cardview_light_background"
+            android:background="@null"
+            android:onClick="onBackButtonClick" />
 
-    <androidx.cardview.widget.CardView
+        <TextView
+            android:id="@+id/text_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="eVMS"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_secondary" />
+    </RelativeLayout>
+
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/card_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,33 +71,72 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <EditText
-                android:id="@+id/text_adminID"
+            <TextView
+                android:id="@+id/text_login_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin Login"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_secondary"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_layout_adminID"
+                style="@style/RoundedTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
                 android:hint="Enter Admin ID"
-                android:inputType="text"
-                android:padding="8dp"
-                android:layout_marginBottom="8dp"/>
+                app:hintTextColor="@color/hint_text_color">
 
-            <EditText
-                android:id="@+id/text_adminPassword"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_adminID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColorHint="@color/text_secondary" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_layout_adminPassword"
+                style="@style/RoundedTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
                 android:hint="Enter Password"
-                android:inputType="textPassword"
-                android:padding="8dp"
-                android:layout_marginBottom="16dp"/>
+                app:hintTextColor="@color/hint_text_color">
 
-            <Button
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_adminPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/text_secondary" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/checkBox_showPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:text="Show Password"
+                android:textColor="@color/text_secondary" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_adminLoggedIn"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp"
+                android:backgroundTint="@color/button_primary"
+                android:padding="16dp"
                 android:text="Login"
-                android:textColor="@android:color/white"
-                android:padding="16dp"/>
+                app:cornerRadius="20dp" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

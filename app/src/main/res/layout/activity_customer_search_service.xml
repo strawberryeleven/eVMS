@@ -77,8 +77,6 @@
             android:gravity="center"
             android:padding="8dp"/>
     </LinearLayout>
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/servicesRecyclerView"
         android:layout_width="match_parent"

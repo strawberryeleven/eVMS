@@ -20,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
@@ -93,28 +94,59 @@ public class adminRemoveManager extends AppCompatActivity {
 
     private void removeManager(String managerID) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.runTransaction((Transaction.Function<Void>) transaction -> {
-            DocumentReference managerRef = db.collection("Manager").document(managerID);
-            DocumentSnapshot managerSnapshot = transaction.get(managerRef);
-            if (managerSnapshot.exists()) {
-                // Assuming 'oldEmployeeId' is correctly fetched and exists
-                String oldEmployeeId = managerSnapshot.getString("oldEmployeeId");
-                DocumentReference employeeRef = db.collection("Employees").document(oldEmployeeId);
-                transaction.delete(managerRef);  // Delete manager
-                transaction.delete(employeeRef);  // Delete linked employee
-                return null;
-            } else {
-                throw new FirebaseFirestoreException("Manager does not exist",
-                        FirebaseFirestoreException.Code.ABORTED);
-            }
-        }).addOnSuccessListener(aVoid -> {
-            Toast.makeText(adminRemoveManager.this, "Manager and related employee removed successfully", Toast.LENGTH_LONG).show();
-            refreshManagerList(); // Refresh the list to show updated data
-        }).addOnFailureListener(e -> {
-            Toast.makeText(adminRemoveManager.this, "Failed to remove manager or employee: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            Log.e("RemoveManagerError", "Error removing manager or employee: ", e);
-        });
+
+        // Fetch employee documents outside the transaction
+        db.collection("Employees")
+                .whereEqualTo("ManagedBy", managerID)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    // Start the transaction
+                    db.runTransaction((Transaction.Function<Void>) transaction -> {
+                        DocumentReference managerRef = db.collection("Manager").document(managerID);
+                        // Asynchronously get the manager document
+                        DocumentSnapshot managerSnapshot = transaction.get(managerRef);
+                        if (managerSnapshot.exists()) {
+                            // Delete the manager
+                            transaction.delete(managerRef);
+
+                            // Process all employees managed by this manager
+                            for (QueryDocumentSnapshot employeeSnapshot : queryDocumentSnapshots) {
+                                DocumentReference employeeRef = db.collection("Employees").document(employeeSnapshot.getId());
+                                transaction.update(employeeRef, "ManagedBy", "");  // Clear the ManagedBy field
+                            }
+
+                            // Also delete the employee document with the oldEmployeeID
+                            String oldEmployeeId = managerSnapshot.getString("oldEmployeeId");
+                            if (oldEmployeeId != null && !oldEmployeeId.isEmpty()) {
+                                // Delete the employee document
+                                DocumentReference oldEmployeeRef = db.collection("Employees").document(oldEmployeeId);
+                                transaction.delete(oldEmployeeRef);
+                            }
+
+                            return null;  // Transaction must return null if it's void
+                        } else {
+                            throw new FirebaseFirestoreException("Manager does not exist", FirebaseFirestoreException.Code.ABORTED);
+                        }
+                    }).addOnSuccessListener(aVoid -> {
+                        Toast.makeText(adminRemoveManager.this, "Manager removed and related employee records updated successfully.", Toast.LENGTH_LONG).show();
+                        refreshManagerList();  // Refresh the manager list
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(adminRemoveManager.this, "Failed to remove manager or update employees: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("TransactionError", "Error during transaction: ", e);
+                    });
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure to fetch employee documents
+                    Toast.makeText(adminRemoveManager.this, "Failed to fetch employee documents: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.e("FetchError", "Error fetching employee documents: ", e);
+                });
     }
+
+
+
+
+
+
 
 
 

@@ -82,13 +82,39 @@ public class managerAddEmployee extends AppCompatActivity {
         return true;
     }
     private void validateManagerIdAndAddEmployee() {
-        String managerId = editTextManagerId.getText().toString().trim();
+        validateEmployeeEmail();
+    }
+
+    private void validateEmployeeEmail() {
+        String email = editTextEmail.getText().toString().trim();
+
+        // Check if the email already exists in the Employees collection
+        db.collection("Employees")
+                .whereEqualTo("email", email)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        // Email already exists, show error message
+                        Toast.makeText(managerAddEmployee.this, "Email is already in use!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Email is unique, proceed with validating Manager ID
+                        String managerId = editTextManagerId.getText().toString().trim();
+                        validateManagerId(managerId);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(managerAddEmployee.this, "Error checking email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void validateManagerId(String managerId) {
         // Check if Manager ID is valid
         db.collection("Manager")
                 .whereEqualTo("ManagerID", managerId) // Use the correct field name as per your schema
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
+                        // Manager ID is valid, proceed to generate Employee ID and add employee
                         generateEmployeeIdAndAdd();
                     } else {
                         Toast.makeText(managerAddEmployee.this, "Invalid Manager ID.", Toast.LENGTH_SHORT).show();
@@ -96,6 +122,7 @@ public class managerAddEmployee extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> Log.e("AddEmployee", "Failed to validate Manager ID", e));
     }
+
 
     private void generateEmployeeIdAndAdd() {
         // Get the last Employee ID and increment it

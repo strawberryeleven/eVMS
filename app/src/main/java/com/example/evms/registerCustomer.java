@@ -49,13 +49,29 @@ public class registerCustomer extends AppCompatActivity {
             return;
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirm Sign Up");
-        builder.setMessage("Are you sure you want to sign up?");
-        builder.setPositiveButton("Yes", (dialogInterface, i) -> createCustomerAccount(name, email, password, phone));
-        builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
-        builder.show();
-    }
+        // Check if the email already exists
+        db.collection("Customers")
+                .whereEqualTo("Email", email)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        // Email already exists, show error message
+                        Toast.makeText(this, "Email is already in use!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Email is unique, proceed with sign up
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Confirm Sign Up");
+                        builder.setMessage("Are you sure you want to sign up?");
+                        builder.setPositiveButton("Yes", (dialogInterface, i) -> createCustomerAccount(name, email, password, phone));
+                        builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
+                        builder.show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error checking email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+        }
+
 
     private void createCustomerAccount(String name, String email, String password, String phone) {
         db.collection("Customers")
