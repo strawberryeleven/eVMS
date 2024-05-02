@@ -1,19 +1,18 @@
 package com.example.evms;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ShowGatepass extends AppCompatActivity {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String gatepassId, serviceDate, numberPlate;
 
     @Override
@@ -49,21 +48,14 @@ public class ShowGatepass extends AppCompatActivity {
     private void showGatepassDialog(DocumentSnapshot document) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Gatepass");
-        StringBuilder message = new StringBuilder();
-        message.append("Customer Email: ").append(document.getString("CustomerEmail")).append("\n")
-                .append("Service ID: ").append(document.getString("ServiceID")).append("\n")
-                .append("Number Plate: ").append(document.getString("NumberPlate")).append("\n")
-                .append("Service Date: ").append(document.getString("ServiceDate")).append("\n")
-                .append("Gatepass ID: ").append(document.getString("GatepassID")).append("\n")
-                .append("").append(document.getString("NotificationText"));
+        String message = "Customer Email: " + document.getString("CustomerEmail") + "\n" +
+                "Service ID: " + document.getString("ServiceID") + "\n" +
+                "Number Plate: " + document.getString("NumberPlate") + "\n" +
+                "Service Date: " + document.getString("ServiceDate") + "\n" +
+                "Gatepass key: " + document.getString("GatepassID") + "\n";
 
-        builder.setMessage(message.toString());
-        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                deleteNotification(document.getId());
-            }
-        });
+        builder.setMessage(message);
+        builder.setPositiveButton("Delete", (dialog, which) -> deleteNotification(document.getId()));
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
         builder.show();
     }
