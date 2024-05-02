@@ -132,5 +132,18 @@
         android:dividerHeight="1dp"
         tools:listitem="@layout/item_service" />
 
+    <ImageButton
+        android:id="@+id/btnViewFilters"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/rounded_gray_background"
+        android:contentDescription="View Filters"
+        android:onClick="customerViewVehicles"
+        android:padding="2dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_filter"
+        android:layout_above="@id/searchInputLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="2dp" />
 
 </RelativeLayout>

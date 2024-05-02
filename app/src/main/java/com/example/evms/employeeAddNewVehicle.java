@@ -16,6 +16,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class employeeAddNewVehicle extends AppCompatActivity {
 
     private static final int SCAN_REQUEST_CODE = 1; // Define a request code for your scan activity
@@ -82,15 +85,23 @@ public class employeeAddNewVehicle extends AppCompatActivity {
 
 
     // Method to add the vehicle data to Firestore
+    // Method to add the vehicle data to Firestore
     private void addVehicleToFirestore() {
-        String email = customerEmail.getText().toString();
-        String model = vehicleModel.getText().toString();
-        String kms = kmsDriven.getText().toString();
-        String color = vehicleColor.getText().toString();
-        String plate = numberPlate.getText().toString();
+        String customerEmailText = customerEmail.getText().toString();
+        String modelText = vehicleModel.getText().toString();
+        String kmsDrivenText = kmsDriven.getText().toString();
+        String colorText = vehicleColor.getText().toString();
+        String numberPlateText = numberPlate.getText().toString();
 
-        if (!email.isEmpty() && !model.isEmpty() && !kms.isEmpty() && !color.isEmpty() && !plate.isEmpty()) {
-            Vehicle vehicle = new Vehicle(plate, model, kms, color, email);  // Pass email to the constructor
+        if (!customerEmailText.isEmpty() && !modelText.isEmpty() && !kmsDrivenText.isEmpty() && !colorText.isEmpty() && !numberPlateText.isEmpty()) {
+            // Using HashMap to ensure proper field names
+            Map<String, Object> vehicle = new HashMap<>();
+            vehicle.put("NumberPlate", numberPlateText);
+            vehicle.put("Model", modelText);
+            vehicle.put("KmsDriven", kmsDrivenText);
+            vehicle.put("Color", colorText);
+            vehicle.put("CustomerEmail", customerEmailText);
+
             db.collection("Vehicles")
                     .add(vehicle)
                     .addOnSuccessListener(documentReference -> Toast.makeText(this, "Vehicle added successfully!", Toast.LENGTH_SHORT).show())
@@ -99,5 +110,6 @@ public class employeeAddNewVehicle extends AppCompatActivity {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
         }
     }
+
 
 }

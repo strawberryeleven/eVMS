@@ -65,5 +65,6 @@ dependencies {
     implementation ("com.github.yalantis:ucrop:2.2.6")
     implementation ("com.stripe:stripe-java:20.96.0")
 
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 }
