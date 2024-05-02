@@ -2,9 +2,11 @@ package com.example.evms;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,13 @@ public class customerHomepage extends AppCompatActivity {
         customerEmail = intent.getStringExtra("customerEmail");
         Toast.makeText(this, "Logged in as: " + customerEmail, Toast.LENGTH_LONG).show();
 
+        ImageView notificationIcon = findViewById(R.id.notificationIcon);
+        notificationIcon.setOnClickListener(v -> {
+            Intent notificationIntent = new Intent(customerHomepage.this, CustomerNotificationPanel.class);  // Renamed the variable here
+            notificationIntent.putExtra("customerEmail", customerEmail);  // Pass the customerEmail to the NotificationPanel activity
+            startActivity(notificationIntent);
+        });
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -50,6 +59,36 @@ public class customerHomepage extends AppCompatActivity {
         displayPendingService();
 
         setupButtonListeners(searchButton, testButton, historyButton, viewVehiclesButton);
+
+        fetchNotificationCount();
+    }
+
+    private void fetchNotificationCount() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Notification") // Ensure the collection name is correct
+                .whereEqualTo("CustomerEmail", customerEmail)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        final int count = task.getResult().size(); // Count the documents which match the query
+                        runOnUiThread(() -> {
+                            updateNotificationBadge(count); // Update the notification badge
+                            Toast.makeText(customerHomepage.this, "You have " + count + " notifications", Toast.LENGTH_LONG).show(); // Show the count in a toast
+                        });
+                    } else {
+                        Log.d("FetchNotifError", "Error getting documents: ", task.getException());
+                    }
+                });
+    }
+
+    private void updateNotificationBadge(int count) {
+        TextView notificationCount = findViewById(R.id.notificationCount);
+        if (count > 0) {
+            notificationCount.setText(String.valueOf(count));
+            notificationCount.setVisibility(View.VISIBLE);
+        } else {
+            notificationCount.setVisibility(View.GONE);
+        }
     }
 
     private void setupButtonListeners(Button searchButton, Button testButton, Button historyButton, ImageButton viewVehiclesButton) {

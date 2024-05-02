@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/cardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Card Number" />
+
+    <EditText
+        android:id="@+id/cvc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CVC" />
+
+    <EditText
+        android:id="@+id/expiryMonth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Expiry Month (MM)" />
+
+    <EditText
+        android:id="@+id/expiryYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Expiry Year (YYYY)" />
+</LinearLayout>

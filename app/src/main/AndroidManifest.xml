@@ -121,6 +121,12 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".CustomerNotificationPanel"
+            android:exported="false" />
+        <activity
+            android:name=".MakePayment"
+            android:exported="false"/>
     </application>
 
 </manifest>
