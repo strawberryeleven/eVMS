@@ -48,9 +48,14 @@
             android:name=".customerViewHistory"
             android:exported="false" />
         <activity
-            android:name=".customerViewHstory"
+            android:name=".ShowGatepass"
             android:exported="false" />
-
+        <activity
+            android:name=".CreateGatepass"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerServiceFeedback"
+            android:exported="false" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -74,7 +79,7 @@
             android:name=".customerSearchService"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".adminAppointManager"

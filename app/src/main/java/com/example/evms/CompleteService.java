@@ -91,15 +91,23 @@ public class CompleteService extends AppCompatActivity {
     }
 
     private void createNotification(String servicePrice) {
-        String notificationText = "Make Payment: " + servicePrice;
+        String notificationText = "Make Payment: " + servicePrice; // Constructs the notification message
         Map<String, Object> notification = new HashMap<>();
         notification.put("CustomerEmail", customerEmail);
-        notification.put("Notification", notificationText);
+        notification.put("NotificationText", notificationText); // Assuming field name in Firestore is "NotificationText"
+        notification.put("NotificationType", "payment"); // Specifies the type of notification
+        notification.put("Payment", servicePrice); // Specifies the payment amount
+        notification.put("Status", "Pending"); // Sets the status of the notification
+        notification.put("GatepassID", ""); // Leaves GatepassID empty as specified
+        notification.put("ServiceID", serviceId); // Adds the service ID
+        notification.put("ServiceDate", serviceDate); // Adds the service date
+        notification.put("NumberPlate", numberPlate); // Adds the number plate
 
+        // Adding the notification to the Firestore collection
         db.collection("Notification").add(notification)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Service completed successfully!", Toast.LENGTH_SHORT).show();
-                    finish();  // Close this activity
+                    finish();  // Close this activity after successful creation of the notification
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Failed to create notification", Toast.LENGTH_SHORT).show());
     }

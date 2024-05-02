@@ -57,7 +57,11 @@ public class EmployeeHomepage extends AppCompatActivity {
         });
 
         btnGenerateGatePass.setOnClickListener(v -> {
-            // TODO: Implement the logic to generate a gate pass
+            Intent intent = new Intent(EmployeeHomepage.this, CreateGatepass.class);
+            if (extras != null) {
+                intent.putExtras(extras);  // Pass all received extras to UpdateCustomerRecords
+            }
+            startActivity(intent);
         });
     }
 }
