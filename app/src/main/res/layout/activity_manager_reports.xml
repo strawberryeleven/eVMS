@@ -5,7 +5,39 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".managerReports">
+    tools:context=".managerReports"
+    android:padding="24dp"
+    android:background="@color/background_dark">
+
+    <!-- Reports Heading -->
+    <TextView
+        android:id="@+id/text_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reports"
+        android:textColor="@color/text_secondary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:padding="1dp"
+        android:gravity="center"
+        android:text="&lt;"
+        android:textSize="24sp"
+        android:textColor="@color/text_primary"
+        android:backgroundTint="@color/cardview_light_background"
+        android:onClick="onBackButtonClick"
+        app:layout_constraintTop_toTopOf="@id/text_heading"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="8dp" />
 
     <!-- Service Report Button -->
     <Button
@@ -13,10 +45,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Service Report"
+        android:backgroundTint="@color/button_primary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintTop_toBottomOf="@id/text_heading"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp" />
 
     <!-- Employee Report Button -->
     <Button
@@ -24,9 +59,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Employee Report"
-        app:layout_constraintTop_toBottomOf="@id/button4"
+        android:backgroundTint="@color/button_primary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button4"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp" />
 
     <!-- Sales Report Button -->
     <Button
@@ -34,9 +73,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Sales Report"
-        app:layout_constraintTop_toBottomOf="@id/button5"
+        android:backgroundTint="@color/button_primary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button5"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
