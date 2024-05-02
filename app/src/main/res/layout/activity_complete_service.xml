@@ -56,15 +56,27 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Add VerifyVehicle button -->
+    <Button
+        android:id="@+id/btnVerifyVehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/employeeRemarksInputLayout"
+        android:layout_centerHorizontal="true"
+        android:text="VerifyVehicle"
+        android:textColor="@color/text_primary"
+        android:onClick="onVerifyVehicleClick"/>
+
     <Button
         android:id="@+id/btnCompleteService"
         android:layout_width="260dp"
         android:layout_height="68dp"
         style="@style/Widget.MaterialComponents.Button"
         android:text="Complete Service"
-        android:layout_below="@id/employeeRemarksInputLayout"
+        android:layout_below="@id/btnVerifyVehicle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
         android:textColor="@color/colorOnPrimary"
-        android:backgroundTint="@color/button_primary"/>
+        android:backgroundTint="@color/button_primary"
+        android:enabled="false"/>
 </RelativeLayout>

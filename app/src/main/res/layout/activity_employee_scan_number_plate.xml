@@ -5,26 +5,72 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".employeeScanNumberPlate">
+    tools:context=".employeeScanNumberPlate"
+    android:background="@color/background_dark"
+    >
+
+    <TextView
+        android:id="@+id/text_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan Number Plate"
+        android:textColor="@color/text_secondary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="38dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5"/>
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="24dp"
+        android:padding="1dp"
+        android:gravity="center"
+        android:text="&lt;"
+        android:textSize="24sp"
+        android:textColor="@color/text_primary"
+        android:backgroundTint="@color/cardview_light_background"
+        android:onClick="onBackButtonClick"
+        app:layout_constraintTop_toTopOf="@id/text_heading"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="328dp"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_heading"
+        app:layout_constraintBottom_toTopOf="@id/button3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:text="Capture Image"
+        android:layout_width="333dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/colorOnPrimary"
+        android:backgroundTint="@color/button_primary"
+        android:padding="16dp"
+        app:cornerRadius="20dp"
+        android:text="CAPTURE IMAGE"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="110dp" />
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

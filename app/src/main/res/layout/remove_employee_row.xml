@@ -1,40 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="4"
-    android:background="@drawable/table_cell_background">
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/card_color">
 
-    <TextView
-        android:id="@+id/textViewEmployeeID"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:padding="8dp"/>
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/textViewName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:padding="8dp"/>
+        <TextView
+            android:id="@+id/textViewEmployeeID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:textColor="@color/text_secondary"/>
 
-    <TextView
-        android:id="@+id/textViewSalary"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:padding="8dp"/>
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/textViewEmployeeRating"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:padding="8dp"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:textColor="@color/text_secondary"/>
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="7dp"/>
+
+
+        <TextView
+            android:id="@+id/textViewSalary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:textColor="@color/text_secondary"/>
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:id="@+id/textViewEmployeeRating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:textColor="@color/text_secondary"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

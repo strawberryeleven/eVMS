@@ -3,6 +3,7 @@ package com.example.evms;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class loginEmployee extends AppCompatActivity {
 
     private EditText textEmployeeId;
     private EditText textEmployeePassword;
+    private CheckBox showPasswordCheckBox;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -37,8 +39,20 @@ public class loginEmployee extends AppCompatActivity {
 
         textEmployeeId = findViewById(R.id.text_employeeID);
         textEmployeePassword = findViewById(R.id.text_employeePassword);
+        showPasswordCheckBox = findViewById(R.id.checkBox_showPassword);
         Button btnEmployeeLogin = findViewById(R.id.btn_employeeLoggedIn);
+
         btnEmployeeLogin.setOnClickListener(v -> attemptEmployeeLogin());
+
+        // Set up the checkbox to toggle password visibility
+        showPasswordCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                textEmployeePassword.setInputType(145); // InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            } else {
+                textEmployeePassword.setInputType(129); // InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
+            textEmployeePassword.setSelection(textEmployeePassword.getText().length());
+        });
     }
 
     private void attemptEmployeeLogin() {
@@ -56,8 +70,7 @@ public class loginEmployee extends AppCompatActivity {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
-                        // Employee found, prepare to send data
-                        DocumentSnapshot document = task.getResult().getDocuments().get(0); // Corrected to use DocumentSnapshot
+                        DocumentSnapshot document = task.getResult().getDocuments().get(0);
                         Intent intent = new Intent(loginEmployee.this, EmployeeHomepage.class);
                         Objects.requireNonNull(document.getData()).forEach((key, value) -> {
                             intent.putExtra(key, value.toString());  // Assumes all values are suitable for passing as Strings

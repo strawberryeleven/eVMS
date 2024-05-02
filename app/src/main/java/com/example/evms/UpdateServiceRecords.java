@@ -36,6 +36,7 @@ public class UpdateServiceRecords extends AppCompatActivity {
 
         listViewPendingServices.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(UpdateServiceRecords.this, CompleteService.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  // This flag ensures that all activities on top of CompleteService are cleared.
             QueryDocumentSnapshot selectedService = documents.get(position);
             intent.putExtra("ServiceID", selectedService.getString("ServiceID"));
             intent.putExtra("EmployeeID", employeeId);

@@ -1,5 +1,6 @@
 package com.example.evms;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +16,10 @@ import java.util.Map;
 
 public class CompleteService extends AppCompatActivity {
 
+    private static final int SCAN_REQUEST_CODE = 1; // Define a request code for your scan activity
     private EditText etEmployeeRemarks, etServiceRating;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private Button btnCompleteService;
     private String serviceId, employeeId, numberPlate, serviceDate, customerEmail;
 
     @Override
@@ -25,7 +28,8 @@ public class CompleteService extends AppCompatActivity {
         setContentView(R.layout.activity_complete_service);
 
         etEmployeeRemarks = findViewById(R.id.etEmployeeRemarks);
-        Button btnCompleteService = findViewById(R.id.btnCompleteService);
+        btnCompleteService = findViewById(R.id.btnCompleteService);
+        Button btnVerifyVehicle = findViewById(R.id.btnVerifyVehicle);
 
         // Retrieve passed data from intent
         serviceId = getIntent().getStringExtra("ServiceID");
@@ -34,12 +38,47 @@ public class CompleteService extends AppCompatActivity {
         serviceDate = getIntent().getStringExtra("MaintenanceDate");
         customerEmail = getIntent().getStringExtra("CustomerEmail");
 
+        btnVerifyVehicle.setOnClickListener(v -> {
+            Intent intent = new Intent(this, employeeScanNumberPlate.class);
+            startActivityForResult(intent, SCAN_REQUEST_CODE);
+        });
+
         btnCompleteService.setOnClickListener(v -> completeService());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            String scannedNumberPlate = data.getStringExtra("numberPlate");
+            verifyServiceRecord(scannedNumberPlate);
+        }
+    }
+
+    private void verifyServiceRecord(String scannedNumberPlate) {
+        if (!scannedNumberPlate.equals(numberPlate)) {
+            Toast.makeText(this, "InvalidServiceRecord: Number plate does not match", Toast.LENGTH_LONG).show();
+            btnCompleteService.setEnabled(false);
+            return;
+        }
+
+        // Query Firestore to validate CustomerEmail and NumberPlate
+        db.collection("Vehicles")
+                .whereEqualTo("CustomerEmail", customerEmail)
+                .whereEqualTo("NumberPlate", numberPlate)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        btnCompleteService.setEnabled(true);
+                    } else {
+                        Toast.makeText(this, "InvalidServiceRecord: No matching vehicle found", Toast.LENGTH_LONG).show();
+                        btnCompleteService.setEnabled(false);
+                    }
+                });
     }
 
     private void completeService() {
         String remarks = etEmployeeRemarks.getText().toString().trim();
-
 
         if (remarks.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show();
@@ -54,7 +93,7 @@ public class CompleteService extends AppCompatActivity {
         serviceHistoryEntry.put("ServiceDate", serviceDate);
         serviceHistoryEntry.put("EmployeeRemarks", remarks);
         serviceHistoryEntry.put("FeedbackStatus", "Pending");
-        serviceHistoryEntry.put("ServiceRating", Double.parseDouble("0")); // Convert string rating to double
+        serviceHistoryEntry.put("ServiceRating", "0");
 
         db.collection("ServiceHistory").add(serviceHistoryEntry)
                 .addOnSuccessListener(documentReference -> deletePendingService())
@@ -99,6 +138,9 @@ public class CompleteService extends AppCompatActivity {
         notification.put("Payment", servicePrice); // Specifies the payment amount
         notification.put("Status", "Pending"); // Sets the status of the notification
         notification.put("GatepassID", ""); // Leaves GatepassID empty as specified
+        notification.put("ServiceID", serviceId); // Adds the service ID
+        notification.put("ServiceDate", serviceDate); // Adds the service date
+        notification.put("NumberPlate", numberPlate); // Adds the number plate
 
         // Adding the notification to the Firestore collection
         db.collection("Notification").add(notification)
@@ -108,5 +150,4 @@ public class CompleteService extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Failed to create notification", Toast.LENGTH_SHORT).show());
     }
-
 }

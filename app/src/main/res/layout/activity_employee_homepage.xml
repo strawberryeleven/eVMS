@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EmployeeHomepage">
+    tools:context=".EmployeeHomepage"
+    android:padding="24dp"
+    android:background="@color/background_dark">
 
     <TextView
         android:id="@+id/tvEmployeeDashboard"
@@ -14,11 +16,12 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="0dp"
-        android:background="#FFF8E1"
+        android:background="@color/background_dark"
+        android:textColor="@color/text_secondary"
         android:padding="16dp"
         android:text="Employee Dashboard"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,8 +30,11 @@
         android:id="@+id/btnUpdateCustomerRecords"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:backgroundTint="@color/button_primary"
+        android:textColor="@color/colorOnPrimary"
         android:padding="16dp"
         android:text="Update Customer Records"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,9 +46,11 @@
         android:id="@+id/btnUpdateServiceRecords"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:backgroundTint="@color/button_primary"
+        android:textColor="@color/colorOnPrimary"
         android:padding="16dp"
         android:text="Update Service Records"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,26 +62,31 @@
         android:id="@+id/btnGenerateGatePass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:backgroundTint="@color/button_primary"
+        android:textColor="@color/colorOnPrimary"
         android:padding="16dp"
         android:text="Generate Gate Pass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnUpdateServiceRecords" />
 
-    <!-- Scan Number Plate Button -->
     <Button
-        android:id="@+id/scanButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:id="@+id/btnLogOut"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:backgroundTint="@color/colorDanger"
+        android:textColor="@color/colorOnPrimary"
         android:padding="16dp"
-        android:text="Scan Number Plate"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Log out"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnGenerateGatePass" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

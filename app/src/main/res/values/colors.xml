@@ -32,4 +32,6 @@
     <color name="button_primary">#1E90FF</color> <!-- Your button primary color -->
 
     <color name="colorPrimaryDark">#303F9F</color>
+
+    <color name="colorDanger">#95232E</color>
 </resources>

@@ -29,15 +29,6 @@ public class EmployeeHomepage extends AppCompatActivity {
         Button btnGenerateGatePass = findViewById(R.id.btnGenerateGatePass);
 
 
-        // Assuming you have a button with id "scanButton" in your activity_employee_homepage layout
-        findViewById(R.id.scanButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start the employeeScanNumberPlate activity
-                startActivity(new Intent(EmployeeHomepage.this, employeeScanNumberPlate.class));
-            }
-        });
-
         Bundle extras = getIntent().getExtras();
 
         btnUpdateCustomerRecords.setOnClickListener(v -> {
