@@ -146,24 +146,31 @@ public class employeeScanNumberPlate extends AppCompatActivity {
         StringBuilder allText = new StringBuilder();
         for (int i = 0; i < items.size(); i++) {
             TextBlock item = items.valueAt(i);
-            allText.append(item.getValue()).append("\n");  // Append all text to process later
+            allText.append(item.getValue()).append("\n");
         }
-
-        // Debugging: Log or display all captured text
-        Log.d("OCRText", "Captured Text: " + allText.toString());
 
         // Process all text to extract and format license plates correctly
         StringBuilder extractedText = new StringBuilder();
-        // Regex to accommodate optional new lines, spaces, and common OCR misreads
         Pattern pattern = Pattern.compile("([A-Z]{2,4})\\s*-?\\s*\\n?\\s*([0-9Oo]{3,4})", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-
         Matcher matcher = pattern.matcher(allText.toString());
         while (matcher.find()) {
             String letters = matcher.group(1).toUpperCase();  // Standardize letters to uppercase
-            String numbers = matcher.group(2).replaceAll("[Oo]", "0");  // Replace common OCR errors, e.g., 'O' with '0'
+            String numbers = matcher.group(2).replaceAll("[Oo]", "0");  // Replace common OCR errors
             extractedText.append(letters).append('-').append(numbers).append("\n");
         }
 
         textView19.setText(extractedText.toString().isEmpty() ? "No text found" : extractedText.toString());
+
+        // Set the result and finish the activity
+        if (!extractedText.toString().isEmpty()) {
+            Intent data = new Intent();
+            data.putExtra("numberPlate", extractedText.toString().trim());
+            setResult(RESULT_OK, data);
+            finish();  // Close this activity and return
+        } else {
+            setResult(RESULT_CANCELED);
+            finish();  // Close this activity and return
+        }
     }
+
 }

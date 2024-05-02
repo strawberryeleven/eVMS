@@ -22,6 +22,9 @@
         android:theme="@style/Theme.EVMS"
         tools:targetApi="31">
         <activity
+            android:name=".employeeAddNewVehicle"
+            android:exported="false" />
+        <activity
             android:name=".managerRemoveEmployee"
             android:exported="false" />
         <activity

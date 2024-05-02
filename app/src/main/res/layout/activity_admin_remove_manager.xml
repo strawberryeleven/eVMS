@@ -1,89 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".adminRemoveManager">
+    android:background="@color/background_dark"
+    tools:context=".adminRemoveManager"
+    android:padding="24dp">
 
-    <!-- Header for column names -->
+    <TextView
+        android:id="@+id/text_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove Manager"
+        android:textColor="@color/text_secondary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="8dp"/>
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:padding="1dp"
+        android:gravity="center"
+        android:text="&lt;"
+        android:textSize="24sp"
+        android:textColor="@color/text_primary"
+        android:backgroundTint="@color/cardview_light_background"
+        android:onClick="onBackButtonClick"
+        app:layout_constraintTop_toTopOf="@id/text_heading"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Header Layout -->
     <LinearLayout
         android:id="@+id/headerLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="4"
-        android:background="@color/header_background_color"
-        android:padding="8dp">
+        android:padding="15dp"
+        app:layout_constraintTop_toBottomOf="@id/text_heading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Manager ID"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Name"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Salary"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="No of Employees"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- RecyclerView for displaying list of managers -->
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewManagers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/headerLayout"/>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toTopOf="@id/managerIDInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/manager_item" />
 
-    <!-- Layout for Manager ID input and Remove button -->
-    <RelativeLayout
-        android:id="@+id/managerIdLayout"
-        android:layout_width="match_parent"
+    <!-- Manager ID Input Layout -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/managerIDInputLayout"
+        android:layout_width="0dp"
+        style="@style/RoundedTextInputLayout"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toTopOf="@id/buttonRemoveManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/textViewEnterManagerID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Enter Manager ID:"
-            android:textSize="16sp"
-            android:layout_alignParentTop="true" />
-
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextManagerID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_below="@id/textViewEnterManagerID"
-            android:layout_marginTop="8dp" />
+            android:hint="Enter Manager ID"
+            android:inputType="text" />
 
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/buttonRemoveManager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Remove"
-            android:layout_below="@id/editTextManagerID"
-            android:layout_marginTop="16dp" />
-    </RelativeLayout>
+    <!-- Remove Manager Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRemoveManager"
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        app:cornerRadius="20dp"
+        android:text="REMOVE MANAGER"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/button_primary"
+        android:textColor="@color/colorOnPrimary"
+        />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

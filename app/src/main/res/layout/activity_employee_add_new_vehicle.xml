@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/customerEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Customer Email"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/scanNumberPlateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/customerEmail"
+        android:text="Scan Vehicle Number Plate"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/displayNumberPlate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scanNumberPlateButton"
+        android:text="Number Plate"
+        android:background="#E0E0E0"
+        android:padding="8dp"
+        android:textColor="#000000"
+        android:layout_marginTop="8dp"
+        android:editable="false"/>
+
+    <EditText
+        android:id="@+id/vehicleModel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Vehicle Model"
+        android:layout_below="@id/displayNumberPlate"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/kmsDriven"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Kms Driven"
+        android:inputType="number"
+        android:layout_below="@id/vehicleModel"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/vehicleColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Vehicle Color"
+        android:layout_below="@id/kmsDriven"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/addVehicleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Vehicle"
+        android:layout_below="@id/vehicleColor"
+        android:layout_marginTop="16dp" />
+
+</RelativeLayout>

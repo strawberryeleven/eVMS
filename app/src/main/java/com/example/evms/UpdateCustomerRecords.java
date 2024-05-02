@@ -1,5 +1,6 @@
 package com.example.evms;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -82,7 +84,7 @@ public class UpdateCustomerRecords extends AppCompatActivity {
 
     private EditText etEmail, etName, etCustomerId, etPassword, etPhoneNumber;
 
-    private Button confirmEditButton;
+    private Button confirmEditButton, addNewVehicleButton;
     private SearchableCustomer currentSelectedCustomer;
 
 
@@ -106,6 +108,16 @@ public class UpdateCustomerRecords extends AppCompatActivity {
         fetchAllCustomers();
         setUpFilterSpinner();
 
+        ImageButton addNewVehicleButton = findViewById(R.id.addVehicleButton); // ImageButton
+
+        addNewVehicleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the managerAddEmployee activity
+                Intent intent = new Intent(UpdateCustomerRecords.this, employeeAddNewVehicle.class);
+                startActivity(intent);
+            }
+        });
 
 
         confirmEditButton.setOnClickListener(v -> {
