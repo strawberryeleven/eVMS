@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_dark"
     tools:context=".launchPage">
 
     <!-- eVMS Heading -->
@@ -15,75 +16,95 @@
         android:text="eVMS"
         android:textSize="48sp"
         android:textStyle="bold"
+        android:textColor="@color/text_secondary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="80dp" />
 
-    <!-- Admin Login Button -->
-    <Button
-        android:id="@+id/btn_admin"
-        android:layout_width="261dp"
-        android:layout_height="67dp"
-        android:text="@string/login_as_admin"
-        android:textColor="@android:color/white"
-        android:padding="16dp"
+    <TextView
+        android:id="@+id/subheading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Electronic Vehicle Maintenance System"
+        android:textSize="18sp"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintTop_toBottomOf="@id/text_app_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_app_name"
-        app:layout_constraintBottom_toTopOf="@id/btn_manager"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginTop="4dp" />
 
-    <!-- Manager Login Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_admin"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="61dp"
+        android:backgroundTint="@color/button_primary"
+        android:padding="16dp"
+        android:text="@string/login_as_admin"
+        android:textColor="@color/colorOnPrimary"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_manager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_app_name" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_manager"
-        android:layout_width="261dp"
-        android:layout_height="67dp"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/login_as_manager"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorOnPrimary"
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_admin"
         app:layout_constraintBottom_toTopOf="@id/btn_employee"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="61dp"
+        android:backgroundTint="@color/button_primary"
+        app:cornerRadius="20dp"/>
 
     <!-- Employee Login Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_employee"
-        android:layout_width="261dp"
-        android:layout_height="67dp"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/login_as_employee"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorOnPrimary"
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_manager"
         app:layout_constraintBottom_toTopOf="@id/btn_customer"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="61dp"
+        android:backgroundTint="@color/button_primary"
+        app:cornerRadius="20dp"/>
 
     <!-- Customer Login Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_customer"
-        android:layout_width="261dp"
-        android:layout_height="67dp"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/login_as_customer"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorOnPrimary"
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_employee"
         app:layout_constraintBottom_toTopOf="@id/btn_reg_customer"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="61dp"
+        android:backgroundTint="@color/button_primary"
+        app:cornerRadius="20dp"/>
 
     <!-- Register as Customer Text -->
     <TextView
@@ -91,6 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_here_register_as_customer"
+        android:textColor="@color/colorSecondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_customer"

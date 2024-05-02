@@ -8,7 +8,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -22,6 +21,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EVMS"
         tools:targetApi="31">
+        <activity
+            android:name=".employeeAddNewVehicle"
+            android:exported="false" />
+        <activity
+            android:name=".managerRemoveEmployee"
+            android:exported="false" />
+        <activity
+            android:name=".customerViewVehicles"
+            android:exported="false" />
+        <activity
+            android:name=".customerViewHistory"
+            android:exported="false" />
+        <activity
+            android:name=".customerViewHstory"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -46,7 +60,7 @@
             android:name=".customerSearchService"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity2"
             android:exported="false" />
         <activity
             android:name=".adminAppointManager"
@@ -66,19 +80,13 @@
         <activity
             android:name=".UpdateCustomerRecords"
             android:exported="false"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".UpdateServiceRecords"
             android:exported="false" />
         <activity
             android:name=".CompleteService"
             android:exported="false" />
-        <activity
-            android:name=".CustomerNotificationPanel"
-            android:exported="false" />
-        <activity
-            android:name=".MakePayment"
-            android:exported="false"/>
         <activity
             android:name=".ManagerHomepage"
             android:exported="false" />
@@ -112,7 +120,13 @@
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".CustomerNotificationPanel"
+            android:exported="false" />
+        <activity
+            android:name=".MakePayment"
+            android:exported="false"/>
     </application>
 
 </manifest>

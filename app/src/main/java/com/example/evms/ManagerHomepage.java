@@ -26,6 +26,7 @@ public class ManagerHomepage extends AppCompatActivity {
 
         // Find the button by its id
         Button addButton = findViewById(R.id.btn_AddingEmployee);
+        Button removeEmployeeButton = findViewById(R.id.buttonRemoveEmployee);
 
         // Set OnClickListener for the button
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +34,15 @@ public class ManagerHomepage extends AppCompatActivity {
             public void onClick(View v) {
                 // Start the managerAddEmployee activity
                 Intent intent = new Intent(ManagerHomepage.this, managerAddEmployee.class);
+                startActivity(intent);
+            }
+        });
+
+        removeEmployeeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the managerAddEmployee activity
+                Intent intent = new Intent(ManagerHomepage.this, managerRemoveEmployee.class);
                 startActivity(intent);
             }
         });

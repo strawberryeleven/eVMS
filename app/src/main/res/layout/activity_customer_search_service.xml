@@ -1,90 +1,136 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    android:padding="24dp"
     tools:context=".customerSearchService">
 
+    <!-- Appoint Manager -->
+    <TextView
+        android:id="@+id/text_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Service"
+        android:textColor="@color/text_secondary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="8dp"/>
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:padding="1dp"
+        android:gravity="center"
+        android:text="&lt;"
+        android:textSize="24sp"
+        android:textColor="@color/text_primary"
+        android:backgroundTint="@color/cardview_light_background"
+        android:onClick="onBackButtonClick"
+        android:layout_alignBaseline="@id/text_heading"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"/>
+
     <!-- Search Bar and Filter Button -->
-    <EditText
-        android:id="@+id/searchInput"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/searchButton"
-        android:ems="10"
-        android:hint="Enter Service Type"
-        android:inputType="textPersonName"
-        android:padding="10dp" />
+        android:layout_below="@id/text_heading"
+        style="@style/RoundedTextInputLayout"
+        android:layout_marginTop="16dp"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Service Type"
+            android:inputType="text"
+            android:padding="12dp"
+            android:shadowColor="@color/button_primary"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="Search" />
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_alignBaseline="@id/searchInputLayout"
+        android:layout_alignParentEnd="true"
+        android:text="Search"
+        android:background="@color/button_primary"
+        android:textColor="@color/colorOnPrimary"
+        android:layout_marginStart="8dp"/>
 
+    <!-- Statement for Search Result -->
     <TextView
         android:id="@+id/resultStatement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/searchInputLayout"
+        android:textAlignment="center"
         android:text="Showing results for ServiceName"
-        android:layout_below="@id/searchInput"
-        android:padding="10dp" />
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"/>
 
     <!-- Headers for the table columns with a bottom border -->
     <LinearLayout
         android:id="@+id/servicesHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/resultStatement"
         android:orientation="horizontal"
-        android:background="@drawable/table_cell_background">
+        android:layout_marginTop="15dp"
+        android:padding="15dp"
+        android:layout_below="@id/resultStatement">
 
-        <!-- Increased weight for Service Name -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Service Name"
-            android:gravity="center"
-            android:padding="8dp"/>
+            android:textStyle="bold" />
 
-        <!-- Increased weight for Service Type -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Service Type"
-            android:gravity="center"
-            android:padding="8dp"/>
+            android:textStyle="bold" />
 
-        <!-- Reduced weight for Price -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Price"
-            android:gravity="center"
-            android:padding="8dp"/>
+            android:textStyle="bold" />
 
-        <!-- Reduced weight for Rating -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="right"
             android:text="Rating"
-            android:gravity="center"
-            android:padding="8dp"/>
+            android:paddingRight="2dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
-
+    <!-- RecyclerView for displaying list of services -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/servicesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/servicesHeader"
         android:divider="@drawable/divider"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp"
+        tools:listitem="@layout/item_service" />
+
 
 </RelativeLayout>

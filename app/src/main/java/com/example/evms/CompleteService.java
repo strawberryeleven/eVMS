@@ -25,7 +25,6 @@ public class CompleteService extends AppCompatActivity {
         setContentView(R.layout.activity_complete_service);
 
         etEmployeeRemarks = findViewById(R.id.etEmployeeRemarks);
-        etServiceRating = findViewById(R.id.etServiceRating);
         Button btnCompleteService = findViewById(R.id.btnCompleteService);
 
         // Retrieve passed data from intent
@@ -40,9 +39,9 @@ public class CompleteService extends AppCompatActivity {
 
     private void completeService() {
         String remarks = etEmployeeRemarks.getText().toString().trim();
-        String rating = etServiceRating.getText().toString().trim();
 
-        if (remarks.isEmpty() || rating.isEmpty()) {
+
+        if (remarks.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show();
             return;
         }
@@ -55,7 +54,7 @@ public class CompleteService extends AppCompatActivity {
         serviceHistoryEntry.put("ServiceDate", serviceDate);
         serviceHistoryEntry.put("EmployeeRemarks", remarks);
         serviceHistoryEntry.put("FeedbackStatus", "Pending");
-        serviceHistoryEntry.put("ServiceRating", Double.parseDouble(rating)); // Convert string rating to double
+        serviceHistoryEntry.put("ServiceRating", Double.parseDouble("0")); // Convert string rating to double
 
         db.collection("ServiceHistory").add(serviceHistoryEntry)
                 .addOnSuccessListener(documentReference -> deletePendingService())

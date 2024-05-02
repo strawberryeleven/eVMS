@@ -2,49 +2,69 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:background="@color/background_dark">
 
-    <TextView
-        android:id="@+id/tvEmployeeRemarksLabel"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/headingLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal"
+            android:text="&lt;"
+            android:padding="1dp"
+            android:textSize="24sp"
+            android:textColor="@color/text_primary"
+            android:backgroundTint="@color/cardview_light_background"
+            android:background="@null"
+            android:onClick="onBackButtonClick" />
+
+        <TextView
+            android:id="@+id/tvEmployeeRemarksLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Remarks"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/employeeRemarksInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headingLayout"
         android:layout_marginTop="16dp"
-        android:text="Employee Remarks:" />
+        android:layout_marginStart="16dp"
+        android:hint="Employee Remarks">
 
-    <EditText
-        android:id="@+id/etEmployeeRemarks"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvEmployeeRemarksLabel"
-        android:hint="Enter remarks here" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmployeeRemarks"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:inputType="text"
+            android:gravity="top|start" />
 
-    <TextView
-        android:id="@+id/tvServiceRatingLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Service Rating:"
-        android:layout_below="@id/etEmployeeRemarks"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="16dp" />
-
-    <EditText
-        android:id="@+id/etServiceRating"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:layout_below="@id/tvServiceRatingLabel"
-        android:hint="Enter rating (e.g., 4.5)" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnCompleteService"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="68dp"
+        style="@style/Widget.MaterialComponents.Button"
         android:text="Complete Service"
-        android:layout_below="@id/etServiceRating"
+        android:layout_below="@id/employeeRemarksInputLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="24dp"
+        android:textColor="@color/colorOnPrimary"
+        android:backgroundTint="@color/button_primary"/>
 </RelativeLayout>

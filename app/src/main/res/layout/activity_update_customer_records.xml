@@ -1,98 +1,203 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:orientation="vertical"
+    android:background="@color/background_dark">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/searchField"
-        android:layout_width="187dp"
+    <RelativeLayout
+        android:id="@+id/headingLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/customerListView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="196dp"
-        android:layout_marginBottom="33dp"
-        android:hint="search" />
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
-    <Spinner
-        android:id="@+id/filterSpinner"
-        android:layout_width="159dp"
-        android:layout_height="47dp"
-        android:layout_above="@+id/customerListView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="230dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="32dp"
-        android:entries="@array/customer_fields" />
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal"
+            android:text="&lt;"
+            android:padding="1dp"
+            android:textSize="24sp"
+            android:textColor="@color/text_primary"
+            android:backgroundTint="@color/cardview_light_background"
+            android:background="@null"
+            android:onClick="onBackButtonClick" />
+
+        <TextView
+            android:id="@+id/text_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Update Records"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headingLayout"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchInputLayout"
+            android:layout_width="match_parent"
+            style="@style/RoundedTextInputLayout"
+            android:layout_height="wrap_content"
+            android:hint="Enter">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:padding="12dp"
+                android:shadowColor="@color/button_primary" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/filterSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@id/searchInputLayout"
+            android:layout_marginStart="20dp"
+            android:entries="@array/customer_fields" />
+
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/customerListView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_above="@+id/customerInfoLayout"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="31dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="45dp"
+        android:layout_below="@id/searchLayout"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:background="#00FBFBFB" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="253dp"
         android:id="@+id/customerInfoLayout"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/customerListView"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="196dp"
-        android:orientation="vertical">
+        android:layout_marginBottom="96dp"
+        android:orientation="vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
 
-        <EditText
-            android:id="@+id/etEmail"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email" />
+            android:layout_marginTop="5dp"
+            style="@style/RoundedTextInputLayout"
+            android:hint="Email">
 
-        <EditText
-            android:id="@+id/etName"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name" />
+            android:layout_marginTop="5dp"
+            style="@style/RoundedTextInputLayout"
+            android:hint="Name">
 
-        <EditText
-            android:id="@+id/etCustomerId"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/customerIdInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Customer ID" />
+            android:layout_marginTop="5dp"
+            style="@style/RoundedTextInputLayout"
+            android:hint="Customer ID">
 
-        <EditText
-            android:id="@+id/etPassword"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCustomerId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password" />
+            style="@style/RoundedTextInputLayout"
+            android:hint="Password">
 
-        <EditText
-            android:id="@+id/etPhoneNumber"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneNumberInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number" />
+            android:layout_marginTop="5dp"
+            style="@style/RoundedTextInputLayout"
+            android:hint="Phone Number">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/confirmEditButton"
-        android:layout_width="260dp"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="75dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginBottom="14dp"
-        android:text="Confirm Edit" />
+        android:orientation="horizontal"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:gravity="center_vertical"> <!-- Change gravity to center_vertical -->
+
+        <Button
+            android:id="@+id/confirmEditButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="68dp"
+            android:textColor="@color/colorOnPrimary"
+            android:backgroundTint="@color/button_primary"
+            android:text="CONFIRM EDIT" />
+
+        <ImageButton
+            android:id="@+id/addVehicleButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="25dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_vehicle_add"
+            android:onClick="employeeAddNewVehicle"
+            android:background="@drawable/circle_background" />
+    </LinearLayout>
+
 
 </RelativeLayout>

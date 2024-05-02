@@ -1,5 +1,6 @@
 package com.example.evms;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +25,7 @@ public class customerSearchService extends AppCompatActivity {
     private LinearLayout servicesHeader;
     private TextView resultStatement;
     private FirebaseFirestore db;
-
+    private String CustomerEmail;
     private ServiceAdapter serviceAdapter;
 
     @Override
@@ -42,6 +43,11 @@ public class customerSearchService extends AppCompatActivity {
         // Initialize Firebase Firestore
         db = FirebaseFirestore.getInstance();
 
+        Intent intent = getIntent();
+        CustomerEmail = intent.getStringExtra("customerEmail");
+
+
+
         // Setup the RecyclerView
         servicesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         serviceAdapter = new ServiceAdapter(this, new ArrayList<>(), v -> {
@@ -52,7 +58,9 @@ public class customerSearchService extends AppCompatActivity {
                 Service service = serviceAdapter.getItemAt(pos);
                 serviceAdapter.showServiceDetailsDialog(service);
             }
-        });
+        }, CustomerEmail); // Pass the userEmail here);
+
+
         servicesRecyclerView.setAdapter(serviceAdapter);
 
         // Setup search button behavior

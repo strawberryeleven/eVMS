@@ -54,7 +54,7 @@ public class CustomerNotificationPanel extends AppCompatActivity {
         textView.setPadding(20, 50, 20, 50);
         textView.setMinimumHeight(100);
         textView.setBackgroundResource(R.drawable.notification_background);
-        textView.setGravity(android.view.Gravity.CENTER_VERTICAL);
+        textView.setGravity(Gravity.CENTER_VERTICAL);
 
         // Setting layout parameters with margins
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(

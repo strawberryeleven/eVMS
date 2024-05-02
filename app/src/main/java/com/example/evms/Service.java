@@ -39,12 +39,15 @@ public class Service {
     }
 
     // Convert ServicePrice from String to double
-    public double getServicePrice() {
-        try {
-            return Double.parseDouble(ServicePrice);
-        } catch (NumberFormatException e) {
-            return 0.0; // Return default value or handle error
-        }
+//    public double getServicePrice() {
+//        try {
+//            return Double.parseDouble(ServicePrice);
+//        } catch (NumberFormatException e) {
+//            return 0.0; // Return default value or handle error
+//        }
+//    }
+    public String getServicePrice() {
+        return ServicePrice;
     }
 
     // Convert ServiceRating from String to double
