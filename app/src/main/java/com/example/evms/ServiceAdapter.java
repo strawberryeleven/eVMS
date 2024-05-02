@@ -62,9 +62,21 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
         Service service = services.get(position);
         holder.serviceName.setText(service.getServiceName());
         holder.serviceType.setText(service.getServiceType());
-        holder.servicePrice.setText(String.format("$%.2f", service.getServicePrice()));
-        holder.serviceRating.setText(String.format("%.1f", service.getServiceRating()));
 
+        // Convert ServicePrice from String to double for formatting
+        double price = 0.0;
+        try {
+            price = Double.parseDouble(service.getServicePrice());
+        } catch (NumberFormatException e) {
+            Log.e("ServiceAdapter", "Error parsing price", e);
+        }
+        holder.servicePrice.setText(String.format("$%.2f", price));
+
+        holder.serviceRating.setText(String.format("%.1f", service.getServiceRating()));
+        double rating = 0.0;
+
+        double finalPrice = price;
+        double finalRating = rating;
         holder.itemView.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             LayoutInflater inflater = LayoutInflater.from(context);
@@ -83,8 +95,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
             serviceType.setText(service.getServiceType());
             Picasso.get().load(service.getImageUrl()).into(serviceImage);
             serviceDescription.setText(service.getServiceDescription());
-            servicePrice.setText(String.format("$%.2f", service.getServicePrice()));
-            serviceRating.setText(String.format("%.1f", service.getServiceRating()));
+            servicePrice.setText(String.format("$%.2f", finalPrice));
+            serviceRating.setText(String.format("%.1f", finalRating));
 
             buyButton.setOnClickListener(buyView -> {
                 // Prompt the user to select a date

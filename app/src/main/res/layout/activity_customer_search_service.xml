@@ -83,6 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/servicesHeader"
         android:divider="@drawable/divider"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp"
+        tools:listitem="@layout/item_service" />
 
 </RelativeLayout>

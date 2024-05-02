@@ -142,14 +142,6 @@ public class adminRemoveManager extends AppCompatActivity {
                 });
     }
 
-
-
-
-
-
-
-
-
     private void refreshManagerList() {
         // Code to refresh the RecyclerView with updated data
         // This could involve re-querying the database or removing items from the adapter directly

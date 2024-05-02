@@ -70,7 +70,7 @@ public class CompleteService extends AppCompatActivity {
         deleteQuery.get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && !task.getResult().isEmpty()) {
                 task.getResult().getDocuments().get(0).getReference().delete()
-                        .addOnSuccessListener(aVoid -> createNotification())
+                        .addOnSuccessListener(aVoid -> retrieveServicePriceAndCreateNotification())
                         .addOnFailureListener(e -> Toast.makeText(this, "Failed to delete from PendingService", Toast.LENGTH_SHORT).show());
             } else {
                 Toast.makeText(this, "No matching service found in PendingService to delete", Toast.LENGTH_SHORT).show();
@@ -78,9 +78,20 @@ public class CompleteService extends AppCompatActivity {
         });
     }
 
-    private void createNotification() {
-        // Assuming service price is already retrieved and available
-        String notificationText = "Make Payment: " + 100.0; // Example service price
+    private void retrieveServicePriceAndCreateNotification() {
+        db.collection("Service").whereEqualTo("ServiceID", serviceId)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        String servicePrice = task.getResult().getDocuments().get(0).getString("ServicePrice");
+                        createNotification(servicePrice);
+                    } else {
+                        Toast.makeText(this, "Service details not found.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void createNotification(String servicePrice) {
+        String notificationText = "Make Payment: " + servicePrice;
         Map<String, Object> notification = new HashMap<>();
         notification.put("CustomerEmail", customerEmail);
         notification.put("Notification", notificationText);

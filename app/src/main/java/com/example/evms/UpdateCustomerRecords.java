@@ -74,6 +74,9 @@ public class UpdateCustomerRecords extends AppCompatActivity {
     private List<SearchableCustomer> fullCustomerList = new ArrayList<>();
     private List<String> customerDisplayList = new ArrayList<>();
 
+    private List<Integer> filteredCustomerIndices = new ArrayList<>(); // List to store indices of filtered customers
+
+
     private EditText etSearchField;
     private String currentSearchField = "Name"; // Default search field
 
@@ -81,6 +84,8 @@ public class UpdateCustomerRecords extends AppCompatActivity {
 
     private Button confirmEditButton;
     private SearchableCustomer currentSelectedCustomer;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,12 +101,11 @@ public class UpdateCustomerRecords extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
         confirmEditButton = findViewById(R.id.confirmEditButton);
-
         customerListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, customerDisplayList);
         customerListView.setAdapter(customerListAdapter);
-
-        setUpFilterSpinner();
         fetchAllCustomers();
+        setUpFilterSpinner();
+
 
 
         confirmEditButton.setOnClickListener(v -> {
@@ -152,7 +156,8 @@ public class UpdateCustomerRecords extends AppCompatActivity {
         });
 
         customerListView.setOnItemClickListener((parent, view, position, id) -> {
-            currentSelectedCustomer = fullCustomerList.get(position);
+            int originalIndex = filteredCustomerIndices.get(position);  // Get the original index from the filtered list
+            currentSelectedCustomer = fullCustomerList.get(originalIndex);  // Use the original index to fetch the customer
             etEmail.setText(currentSelectedCustomer.getEmail());
             etName.setText(currentSelectedCustomer.getName());
             etCustomerId.setText(currentSelectedCustomer.getCustomerID());
@@ -234,9 +239,12 @@ public class UpdateCustomerRecords extends AppCompatActivity {
 
     private void searchCustomer(String searchText) {
         customerDisplayList.clear();
-        for (SearchableCustomer customer : fullCustomerList) {
+        filteredCustomerIndices.clear();  // Clear the indices list
+        for (int i = 0; i < fullCustomerList.size(); i++) {
+            SearchableCustomer customer = fullCustomerList.get(i);
             if (customer.matchesSearch(searchText, currentSearchField)) {
                 customerDisplayList.add(customer.getField(currentSearchField));
+                filteredCustomerIndices.add(i);  // Store the index of the customer in the full list
             }
         }
         customerListAdapter.notifyDataSetChanged();

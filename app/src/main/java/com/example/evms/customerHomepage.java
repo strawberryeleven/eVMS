@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,26 +14,22 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class customerHomepage extends AppCompatActivity {
 
     private String customerEmail;
-
-    public String getValidEmail(){
-        return customerEmail;
-    }
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_customer_homepage);
+
+        db = FirebaseFirestore.getInstance();  // Initialize Firestore
 
         // Retrieve the email passed from loginCustomer
         Intent intent = getIntent();
@@ -46,80 +43,68 @@ public class customerHomepage extends AppCompatActivity {
         });
 
         Button searchButton = findViewById(R.id.button3);
-
         Button testButton = findViewById(R.id.btn_testEmail);
+        Button historyButton = findViewById(R.id.btnViewHistory);
+        ImageButton viewVehiclesButton = findViewById(R.id.btnViewVehicles); // ImageButton
 
         displayPendingService();
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start customerSearchService activity
-                Intent intent = new Intent(customerHomepage.this, customerSearchService.class);
-                intent.putExtra("customerEmail", customerEmail); // Pass email to customerHomepage
-                startActivity(intent);
-                finish();
-            }
-        });
+        setupButtonListeners(searchButton, testButton, historyButton, viewVehiclesButton);
+    }
 
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start customerSearchService activity
-                Intent intent = new Intent(customerHomepage.this, testEmailPage.class);
-                intent.putExtra("customerEmail", customerEmail); // Pass email to customerHomepage
-                startActivity(intent);
-                finish();
-            }
-        });
+    private void setupButtonListeners(Button searchButton, Button testButton, Button historyButton, ImageButton viewVehiclesButton) {
+        searchButton.setOnClickListener(v -> navigateTo(customerSearchService.class));
+        testButton.setOnClickListener(v -> navigateTo(testEmailPage.class));
+        historyButton.setOnClickListener(v -> navigateTo(customerViewHistory.class));
+        viewVehiclesButton.setOnClickListener(v -> navigateTo(customerViewVehicles.class));
+    }
 
-
+    private void navigateTo(Class<?> cls) {
+        Intent intent = new Intent(customerHomepage.this, cls);
+        intent.putExtra("customerEmail", customerEmail);
+        startActivity(intent);
+        finish();
     }
 
     private void displayPendingService() {
-        DatabaseReference pendingRef = FirebaseDatabase.getInstance().getReference("PendingService");
-        Query latestServiceQuery = pendingRef.orderByChild("CustomerEmail").equalTo(customerEmail);
+        db.collection("PendingService")
+                .whereEqualTo("CustomerEmail", customerEmail)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        if (!task.getResult().isEmpty()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String serviceId = document.getString("ServiceId");
+                                if (serviceId == null) {
+                                    Toast.makeText(this, "Service ID is null for some records", Toast.LENGTH_SHORT).show();
+                                    continue; // Skip this iteration if serviceId is null
+                                }
+                                String maintenanceDate = document.getString("MaintenanceDate");
+                                String numberPlate = document.getString("NumberPlate");
 
-        latestServiceQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    DataSnapshot snapshot = dataSnapshot.getChildren().iterator().next(); // Assuming only one latest service
-                    String ServiceId = snapshot.child("ServiceId").getValue(String.class);
-                    String maintenanceDate = snapshot.child("MaintenanceDate").getValue(String.class);
-                    String numberPlate = snapshot.child("NumberPlate").getValue(String.class);
+                                db.collection("Service").document(serviceId)
+                                        .get()
+                                        .addOnSuccessListener(serviceDocument -> {
+                                            if (serviceDocument.exists()) {
+                                                String serviceName = serviceDocument.getString("ServiceName");
+                                                String servicePrice = serviceDocument.getString("ServicePrice");
 
-                    DatabaseReference serviceRef = FirebaseDatabase.getInstance().getReference("Service").child(ServiceId);
-                    serviceRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot serviceSnapshot) {
-                            if (serviceSnapshot.exists()) {
-                                String serviceName = serviceSnapshot.child("ServiceName").getValue(String.class);
-                                String servicePrice = serviceSnapshot.child("ServicePrice").getValue(String.class);
-
-                                ((TextView) findViewById(R.id.tvServiceName)).setText(serviceName);
-                                ((TextView) findViewById(R.id.tvServicePrice)).setText(String.format("Price: %s", servicePrice));
-                                ((TextView) findViewById(R.id.tvMaintenanceDate)).setText(String.format("Date: %s", maintenanceDate));
-                                ((TextView) findViewById(R.id.tvNumberPlate)).setText(String.format("Plate: %s", numberPlate));
+                                                ((TextView) findViewById(R.id.tvServiceName)).setText(serviceName);
+                                                ((TextView) findViewById(R.id.tvServicePrice)).setText(String.format("Price: %s", servicePrice));
+                                                ((TextView) findViewById(R.id.tvMaintenanceDate)).setText(String.format("Date: %s", maintenanceDate));
+                                                ((TextView) findViewById(R.id.tvNumberPlate)).setText(String.format("Plate: %s", numberPlate));
+                                            }
+                                        })
+                                        .addOnFailureListener(e -> Toast.makeText(customerHomepage.this, "Failed to fetch service details", Toast.LENGTH_SHORT).show());
                             }
+                        } else {
+                            ((TextView) findViewById(R.id.tvServiceName)).setText("No pending services found");
                         }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            Toast.makeText(customerHomepage.this, "Failed to fetch service details", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else {
-                    ((TextView) findViewById(R.id.tvServiceName)).setText("No pending services found");
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(customerHomepage.this, "Failed to load pending services", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    } else {
+                        Toast.makeText(customerHomepage.this, "Failed to load pending services", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> Toast.makeText(customerHomepage.this, "Error fetching services", Toast.LENGTH_LONG).show());
     }
-
 
 }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".managerRemoveEmployee">
+
+    <!-- Header for column names -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:background="@color/header_background_color"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Employee ID"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Name"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Salary"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Employee Rating"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- RecyclerView for displaying list of managers -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewRemoveEmployee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerLayout"/>
+
+    <!-- Layout for Manager ID input and Remove button -->
+    <RelativeLayout
+        android:id="@+id/employeeIdLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentBottom="true"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textViewEnterEmployeeID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter Employee ID:"
+            android:textSize="16sp"
+            android:layout_alignParentTop="true" />
+
+        <EditText
+            android:id="@+id/editTextEmployeeID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_below="@id/textViewEnterEmployeeID"
+            android:layout_marginTop="8dp" />
+
+
+        <Button
+            android:id="@+id/buttonRemoveEmployee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Remove"
+            android:layout_below="@id/editTextEmployeeID"
+            android:layout_marginTop="16dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

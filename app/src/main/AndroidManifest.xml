@@ -22,6 +22,15 @@
         android:theme="@style/Theme.EVMS"
         tools:targetApi="31">
         <activity
+            android:name=".managerRemoveEmployee"
+            android:exported="false" />
+        <activity
+            android:name=".customerViewVehicles"
+            android:exported="false" />
+        <activity
+            android:name=".customerViewHistory"
+            android:exported="false" />
+        <activity
             android:name=".customerViewHstory"
             android:exported="false" />
 

@@ -25,4 +25,5 @@
     <string name="price_hint">Enter Price</string>
     <string name="add_service_button_label">Add Service</string>
     <string name="descriptionField">Add Description for the Service</string>
+    <string name="view_vehicles">View Vehicles</string>
 </resources>
