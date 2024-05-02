@@ -62,6 +62,8 @@ dependencies {
     implementation ("com.github.yalantis:ucrop:2.2.8-native")
 
     implementation ("androidx.appcompat:appcompat:1.4.1")
+    implementation ("com.github.yalantis:ucrop:2.2.6")
+    implementation ("com.stripe:stripe-java:20.96.0")
 
 
 }

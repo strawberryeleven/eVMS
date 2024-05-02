@@ -74,6 +74,12 @@
             android:name=".CompleteService"
             android:exported="false" />
         <activity
+            android:name=".CustomerNotificationPanel"
+            android:exported="false" />
+        <activity
+            android:name=".MakePayment"
+            android:exported="false"/>
+        <activity
             android:name=".ManagerHomepage"
             android:exported="false" />
         <activity

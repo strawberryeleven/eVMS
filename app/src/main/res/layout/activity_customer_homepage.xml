@@ -12,22 +12,53 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search Services"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btn_testEmail"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/btn_testEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="test email"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3"
         app:layout_constraintVertical_bias="0.1" />
+
+    <FrameLayout
+        android:id="@+id/notificationFrame"
+        android:layout_width="52dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/notificationIcon"
+            android:layout_width="51dp"
+            android:layout_height="52dp"
+            android:src="@drawable/ic_notification" />
+
+        <TextView
+            android:id="@+id/notificationCount"
+            android:layout_width="20dp"
+            android:layout_height="21dp"
+            android:layout_gravity="top|end"
+            android:gravity="center"
+            android:minWidth="18dp"
+            android:minHeight="18dp"
+            android:padding="4dp"
+            android:textColor="#FF0000"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="371dp"
+            tools:layout_editor_absoluteY="15dp" /> <!-- Ensure you have this drawable in your resources -->
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

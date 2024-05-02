@@ -41,6 +41,8 @@ public class UpdateServiceRecords extends AppCompatActivity {
             intent.putExtra("EmployeeID", employeeId);
             intent.putExtra("NumberPlate", selectedService.getString("NumberPlate"));
             intent.putExtra("MaintenanceDate", selectedService.getString("MaintenanceDate"));
+            String customerEmail = selectedService.getString("CustomerEmail");
+            intent.putExtra("CustomerEmail", customerEmail);
             startActivity(intent);
         });
     }

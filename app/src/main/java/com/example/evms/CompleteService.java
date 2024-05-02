@@ -16,9 +16,8 @@ import java.util.Map;
 public class CompleteService extends AppCompatActivity {
 
     private EditText etEmployeeRemarks, etServiceRating;
-    private Button btnCompleteService;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String serviceId, employeeId, numberPlate, serviceDate;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String serviceId, employeeId, numberPlate, serviceDate, customerEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +26,14 @@ public class CompleteService extends AppCompatActivity {
 
         etEmployeeRemarks = findViewById(R.id.etEmployeeRemarks);
         etServiceRating = findViewById(R.id.etServiceRating);
-        btnCompleteService = findViewById(R.id.btnCompleteService);
+        Button btnCompleteService = findViewById(R.id.btnCompleteService);
 
         // Retrieve passed data from intent
         serviceId = getIntent().getStringExtra("ServiceID");
         employeeId = getIntent().getStringExtra("EmployeeID");
         numberPlate = getIntent().getStringExtra("NumberPlate");
         serviceDate = getIntent().getStringExtra("MaintenanceDate");
+        customerEmail = getIntent().getStringExtra("CustomerEmail");
 
         btnCompleteService.setOnClickListener(v -> completeService());
     }
@@ -47,37 +47,62 @@ public class CompleteService extends AppCompatActivity {
             return;
         }
 
-        // Prepare the document to store in ServiceHistory
         Map<String, Object> serviceHistoryEntry = new HashMap<>();
+        serviceHistoryEntry.put("CustomerEmail", customerEmail);
         serviceHistoryEntry.put("ServiceID", serviceId);
         serviceHistoryEntry.put("EmployeeID", employeeId);
         serviceHistoryEntry.put("NumberPlate", numberPlate);
         serviceHistoryEntry.put("ServiceDate", serviceDate);
         serviceHistoryEntry.put("EmployeeRemarks", remarks);
+        serviceHistoryEntry.put("FeedbackStatus", "Pending");
         serviceHistoryEntry.put("ServiceRating", Double.parseDouble(rating)); // Convert string rating to double
 
-        // Add to ServiceHistory and delete from PendingService
         db.collection("ServiceHistory").add(serviceHistoryEntry)
-                .addOnSuccessListener(documentReference -> {
-                    // Query to find and delete the matching document in PendingService
-                    Query deleteQuery = db.collection("PendingService")
-                            .whereEqualTo("ServiceID", serviceId)
-                            .whereEqualTo("NumberPlate", numberPlate)
-                            .whereEqualTo("MaintenanceDate", serviceDate);
-
-                    deleteQuery.get().addOnCompleteListener(task -> {
-                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                            task.getResult().getDocuments().get(0).getReference().delete()
-                                    .addOnSuccessListener(aVoid -> {
-                                        Toast.makeText(this, "Service completed successfully!", Toast.LENGTH_SHORT).show();
-                                        finish();  // Close this activity
-                                    })
-                                    .addOnFailureListener(e -> Toast.makeText(this, "Failed to remove service from pending services", Toast.LENGTH_SHORT).show());
-                        } else {
-                            Toast.makeText(this, "No matching service found in pending services to delete", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                })
+                .addOnSuccessListener(documentReference -> deletePendingService())
                 .addOnFailureListener(e -> Toast.makeText(this, "Error saving service history", Toast.LENGTH_SHORT).show());
     }
+
+    private void deletePendingService() {
+        Query deleteQuery = db.collection("PendingService")
+                .whereEqualTo("ServiceID", serviceId)
+                .whereEqualTo("NumberPlate", numberPlate)
+                .whereEqualTo("MaintenanceDate", serviceDate);
+
+        deleteQuery.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                task.getResult().getDocuments().get(0).getReference().delete()
+                        .addOnSuccessListener(aVoid -> retrieveServicePriceAndCreateNotification())
+                        .addOnFailureListener(e -> Toast.makeText(this, "Failed to delete from PendingService", Toast.LENGTH_SHORT).show());
+            } else {
+                Toast.makeText(this, "No matching service found in PendingService to delete", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void retrieveServicePriceAndCreateNotification() {
+        db.collection("Service").whereEqualTo("ServiceID", serviceId)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        String servicePrice = task.getResult().getDocuments().get(0).getString("ServicePrice");
+                        createNotification(servicePrice);
+                    } else {
+                        Toast.makeText(this, "Service details not found.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void createNotification(String servicePrice) {
+        String notificationText = "Make Payment: " + servicePrice;
+        Map<String, Object> notification = new HashMap<>();
+        notification.put("CustomerEmail", customerEmail);
+        notification.put("Notification", notificationText);
+
+        db.collection("Notification").add(notification)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Service completed successfully!", Toast.LENGTH_SHORT).show();
+                    finish();  // Close this activity
+                })
+                .addOnFailureListener(e -> Toast.makeText(this, "Failed to create notification", Toast.LENGTH_SHORT).show());
+    }
+
 }
