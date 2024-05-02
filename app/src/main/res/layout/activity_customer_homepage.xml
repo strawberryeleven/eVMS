@@ -44,6 +44,53 @@
         android:layout_marginEnd="8dp"
         android:onClick="viewHistory" />
 
+    <TextView
+        android:id="@+id/tvLatestService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latest Pending Service"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/btnViewHistory"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvServiceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Service Name"
+        app:layout_constraintTop_toBottomOf="@+id/tvLatestService"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvServicePrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Service Price"
+        app:layout_constraintTop_toBottomOf="@+id/tvServiceName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMaintenanceDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maintenance Date"
+        app:layout_constraintTop_toBottomOf="@+id/tvServicePrice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNumberPlate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number Plate"
+        app:layout_constraintTop_toBottomOf="@+id/tvMaintenanceDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <ImageButton
         android:id="@+id/btnViewVehicles"
         android:layout_width="95dp"
@@ -102,5 +149,7 @@
             tools:layout_editor_absoluteY="15dp" /> <!-- Ensure you have this drawable in your resources -->
 
     </FrameLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
