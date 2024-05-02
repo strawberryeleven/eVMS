@@ -38,6 +38,13 @@ public class customerHomepage extends AppCompatActivity {
         customerEmail = intent.getStringExtra("customerEmail");
         Toast.makeText(this, "Logged in as: " + customerEmail, Toast.LENGTH_LONG).show();
 
+        ImageView pendingServiceIcon = findViewById(R.id.btnViewPendingServices);
+        pendingServiceIcon.setOnClickListener(v -> {
+            Intent pendingServiceIntent = new Intent(customerHomepage.this, customerViewPendingServices.class);
+            pendingServiceIntent.putExtra("customerEmail", customerEmail);
+            startActivity(pendingServiceIntent);
+        });
+
         ImageView notificationIcon = findViewById(R.id.notificationIcon);
         notificationIcon.setOnClickListener(v -> {
             Intent notificationIntent = new Intent(customerHomepage.this, CustomerNotificationPanel.class);  // Renamed the variable here
@@ -55,8 +62,6 @@ public class customerHomepage extends AppCompatActivity {
         Button testButton = findViewById(R.id.btn_testEmail);
         Button historyButton = findViewById(R.id.btnViewHistory);
         ImageButton viewVehiclesButton = findViewById(R.id.btnViewVehicles); // ImageButton
-
-        displayPendingService();
 
         setupButtonListeners(searchButton, testButton, historyButton, viewVehiclesButton);
 
@@ -103,47 +108,6 @@ public class customerHomepage extends AppCompatActivity {
         intent.putExtra("customerEmail", customerEmail);
         startActivity(intent);
         finish();
-    }
-
-    private void displayPendingService() {
-        db.collection("PendingService")
-                .whereEqualTo("CustomerEmail", customerEmail)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        if (!task.getResult().isEmpty()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String serviceId = document.getString("ServiceId");
-                                if (serviceId == null) {
-                                    Toast.makeText(this, "Service ID is null for some records", Toast.LENGTH_SHORT).show();
-                                    continue; // Skip this iteration if serviceId is null
-                                }
-                                String maintenanceDate = document.getString("MaintenanceDate");
-                                String numberPlate = document.getString("NumberPlate");
-
-                                db.collection("Service").document(serviceId)
-                                        .get()
-                                        .addOnSuccessListener(serviceDocument -> {
-                                            if (serviceDocument.exists()) {
-                                                String serviceName = serviceDocument.getString("ServiceName");
-                                                String servicePrice = serviceDocument.getString("ServicePrice");
-
-                                                ((TextView) findViewById(R.id.tvServiceName)).setText(serviceName);
-                                                ((TextView) findViewById(R.id.tvServicePrice)).setText(String.format("Price: %s", servicePrice));
-                                                ((TextView) findViewById(R.id.tvMaintenanceDate)).setText(String.format("Date: %s", maintenanceDate));
-                                                ((TextView) findViewById(R.id.tvNumberPlate)).setText(String.format("Plate: %s", numberPlate));
-                                            }
-                                        })
-                                        .addOnFailureListener(e -> Toast.makeText(customerHomepage.this, "Failed to fetch service details", Toast.LENGTH_SHORT).show());
-                            }
-                        } else {
-                            ((TextView) findViewById(R.id.tvServiceName)).setText("No pending services found");
-                        }
-                    } else {
-                        Toast.makeText(customerHomepage.this, "Failed to load pending services", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(e -> Toast.makeText(customerHomepage.this, "Error fetching services", Toast.LENGTH_LONG).show());
     }
 
 }

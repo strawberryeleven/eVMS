@@ -21,6 +21,12 @@
         android:theme="@style/Theme.EVMS"
         tools:targetApi="31">
         <activity
+            android:name=".managerReports"
+            android:exported="false" />
+        <activity
+            android:name=".customerViewPendingServices"
+            android:exported="false" />
+        <activity
             android:name=".adminEmployeeReport"
             android:exported="false" />
         <activity

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -16,7 +15,6 @@ public class ManagerHomepage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_manager_homepage);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -24,27 +22,23 @@ public class ManagerHomepage extends AppCompatActivity {
             return insets;
         });
 
-        // Find the button by its id
         Button addButton = findViewById(R.id.btn_AddingEmployee);
         Button removeEmployeeButton = findViewById(R.id.buttonRemoveEmployee);
+        Button reportsButton = findViewById(R.id.buttonReports); // Find the Reports button
 
-        // Set OnClickListener for the button
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start the managerAddEmployee activity
-                Intent intent = new Intent(ManagerHomepage.this, managerAddEmployee.class);
-                startActivity(intent);
-            }
+        addButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ManagerHomepage.this, managerAddEmployee.class);
+            startActivity(intent);
         });
 
-        removeEmployeeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start the managerAddEmployee activity
-                Intent intent = new Intent(ManagerHomepage.this, managerRemoveEmployee.class);
-                startActivity(intent);
-            }
+        removeEmployeeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ManagerHomepage.this, managerRemoveEmployee.class);
+            startActivity(intent);
+        });
+
+        reportsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ManagerHomepage.this, managerReports.class); // Start the managerReports activity
+            startActivity(intent);
         });
     }
 }
