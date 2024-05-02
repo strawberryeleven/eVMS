@@ -15,6 +15,8 @@ public class PendingService {
         private String MaintenanceDate;
         private String NumberPlate;
         private String ServiceID;
+        private String ServiceName;
+        private String ServicePrice;
 
         // Default constructor required for Firestore
         public PendingService() {
@@ -26,6 +28,23 @@ public class PendingService {
             NumberPlate = numberPlate;
             ServiceID = serviceID;
         }
+
+        private Service serviceDetails;  // Add this to store the linked service object
+
+        // Constructor, getters, and setters
+        public Service getServiceDetails() {
+            return serviceDetails;
+        }
+
+        public void setServiceDetails(Service serviceDetails) {
+            this.serviceDetails = serviceDetails;
+        }
+        public String getServiceName() { return  ServiceName;}
+
+        public void setServiceName(String serviceName) {this.ServiceName=serviceName;}
+        public String getServicePrice() {return ServicePrice;}
+
+        public void setServicePrice(String servicePrice) {this.ServicePrice=servicePrice;}
 
         // Getters and setters
         public String getCustomerEmail() {
