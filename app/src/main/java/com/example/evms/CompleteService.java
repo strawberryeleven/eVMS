@@ -21,7 +21,7 @@ public class CompleteService extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button btnCompleteService;
     private String serviceId, employeeId, numberPlate, serviceDate, customerEmail;
-
+    private Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,20 @@ public class CompleteService extends AppCompatActivity {
         });
 
         btnCompleteService.setOnClickListener(v -> completeService());
+        backButton = findViewById(R.id.backButton);
+        // Set up the listener for the back button
+        backButton.setOnClickListener(v->onBackPressed());
+    }
+    @Override
+    public void onBackPressed() {
+        // Check if there are fragments in the back stack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            // If there are fragments in the back stack, pop the fragment
+            getSupportFragmentManager().popBackStack();
+        } else {
+            // If there are no fragments in the back stack, perform default back button behavior
+            super.onBackPressed();
+        }
     }
 
     @Override

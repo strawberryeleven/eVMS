@@ -2,6 +2,8 @@ package com.example.evms;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -26,7 +28,7 @@ public class adminSalesReport extends AppCompatActivity {
     LineChart lineChart;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
-
+    private Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,21 @@ public class adminSalesReport extends AppCompatActivity {
         lineChart = findViewById(R.id.managerSalesLineChart);
         setupChartBasics();
         fetchSalesData();  // Asynchronously fetch data and setup chart in its callback
+
+        backButton = findViewById(R.id.backButton);
+        // Set up the listener for the back button
+        backButton.setOnClickListener(v->onBackPressed());
+    }
+    @Override
+    public void onBackPressed() {
+        // Check if there are fragments in the back stack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            // If there are fragments in the back stack, pop the fragment
+            getSupportFragmentManager().popBackStack();
+        } else {
+            // If there are no fragments in the back stack, perform default back button behavior
+            super.onBackPressed();
+        }
     }
 
     private void setupChartBasics() {

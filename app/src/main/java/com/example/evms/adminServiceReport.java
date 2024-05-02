@@ -2,6 +2,8 @@ package com.example.evms;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -20,7 +22,7 @@ public class adminServiceReport extends AppCompatActivity {
 
     PieChart pieChart;
     FirebaseFirestore db = FirebaseFirestore.getInstance();  // Firestore instance
-
+    private Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,21 @@ public class adminServiceReport extends AppCompatActivity {
         pieChart = findViewById(R.id.MpieChart);
         setupPieChart();
         loadPieChartData();  // Load data from Firestore
+
+        backButton = findViewById(R.id.backButton);
+        // Set up the listener for the back button
+        backButton.setOnClickListener(v->onBackPressed());
+    }
+    @Override
+    public void onBackPressed() {
+        // Check if there are fragments in the back stack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            // If there are fragments in the back stack, pop the fragment
+            getSupportFragmentManager().popBackStack();
+        } else {
+            // If there are no fragments in the back stack, perform default back button behavior
+            super.onBackPressed();
+        }
     }
 
     private void setupPieChart() {

@@ -3,6 +3,7 @@ package com.example.evms;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.github.mikephil.charting.charts.BarChart;
@@ -24,6 +25,8 @@ import java.util.Map;
 public class adminEmployeeReport extends AppCompatActivity {
     BarChart barChart;
     FirebaseFirestore db;
+    private Button backButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,22 @@ public class adminEmployeeReport extends AppCompatActivity {
         barChart = findViewById(R.id.employeeBarChart);
         setupBarChart();
         fetchEmployeeRatings();
+
+        backButton = findViewById(R.id.backButton);
+        // Set up the listener for the back button
+        backButton.setOnClickListener(v->onBackPressed());
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Check if there are fragments in the back stack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            // If there are fragments in the back stack, pop the fragment
+            getSupportFragmentManager().popBackStack();
+        } else {
+            // If there are no fragments in the back stack, perform default back button behavior
+            super.onBackPressed();
+        }
     }
 
     private void setupBarChart() {
@@ -52,6 +71,8 @@ public class adminEmployeeReport extends AppCompatActivity {
 
         YAxis rightAxis = barChart.getAxisRight();
         rightAxis.setEnabled(false);
+
+
     }
 
     private void fetchEmployeeRatings() {

@@ -33,7 +33,7 @@ public class adminRemoveManager extends AppCompatActivity {
     private RecyclerView recyclerViewManagers;
     private ManagerAdapter adapter; // Assuming you have a RecyclerView adapter named ManagerAdapter
     private List<Manager> managerList = new ArrayList<>();
-
+    private Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,20 @@ public class adminRemoveManager extends AppCompatActivity {
         initUI();
         setupButtonListeners();
         fetchManagersAndSetupAdapter(); // This is the new method to fetch and setup
+        backButton = findViewById(R.id.backButton);
+        // Set up the listener for the back button
+        backButton.setOnClickListener(v->onBackPressed());
+    }
+    @Override
+    public void onBackPressed() {
+        // Check if there are fragments in the back stack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            // If there are fragments in the back stack, pop the fragment
+            getSupportFragmentManager().popBackStack();
+        } else {
+            // If there are no fragments in the back stack, perform default back button behavior
+            super.onBackPressed();
+        }
     }
 
     private void initUI() {

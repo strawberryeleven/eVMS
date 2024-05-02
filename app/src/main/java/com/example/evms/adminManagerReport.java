@@ -20,11 +20,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import android.util.Log;
+import android.widget.Button;
 
 public class adminManagerReport extends AppCompatActivity {
     BarChart barChart;
     FirebaseFirestore db;
-
+    private Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,21 @@ public class adminManagerReport extends AppCompatActivity {
         barChart = findViewById(R.id.managerBarChart);
         setupBarChart();
         fetchManagerPerformance();
+
+        backButton = findViewById(R.id.backButton);
+        // Set up the listener for the back button
+        backButton.setOnClickListener(v->onBackPressed());
+    }
+    @Override
+    public void onBackPressed() {
+        // Check if there are fragments in the back stack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            // If there are fragments in the back stack, pop the fragment
+            getSupportFragmentManager().popBackStack();
+        } else {
+            // If there are no fragments in the back stack, perform default back button behavior
+            super.onBackPressed();
+        }
     }
 
     private void setupBarChart() {

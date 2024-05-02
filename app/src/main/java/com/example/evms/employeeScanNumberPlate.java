@@ -41,7 +41,7 @@ public class employeeScanNumberPlate extends AppCompatActivity {
     private Button buttonCapture;
     private TextView textView19;
     private Uri imageUri;
-
+    private Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +58,21 @@ public class employeeScanNumberPlate extends AppCompatActivity {
                 captureImage();
             }
         });
+
+        backButton = findViewById(R.id.backButton);
+        // Set up the listener for the back button
+        backButton.setOnClickListener(v->onBackPressed());
+    }
+    @Override
+    public void onBackPressed() {
+        // Check if there are fragments in the back stack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            // If there are fragments in the back stack, pop the fragment
+            getSupportFragmentManager().popBackStack();
+        } else {
+            // If there are no fragments in the back stack, perform default back button behavior
+            super.onBackPressed();
+        }
     }
 
     private void checkCameraPermission() {

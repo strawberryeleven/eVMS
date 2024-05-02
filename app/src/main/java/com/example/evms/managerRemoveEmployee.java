@@ -33,7 +33,7 @@ public class managerRemoveEmployee extends AppCompatActivity {
     private RecyclerView recyclerViewEmployees;
     private RemoveEmployeeAdapter adapter;
     private List<Employee> employeeList = new ArrayList<>();
-
+    private Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,21 @@ public class managerRemoveEmployee extends AppCompatActivity {
         initUI();
         setupButtonListeners();
         fetchEmployeesAndSetupAdapter(); // This is the new method to fetch and setup
+
+        backButton = findViewById(R.id.backButton);
+        // Set up the listener for the back button
+        backButton.setOnClickListener(v->onBackPressed());
+    }
+    @Override
+    public void onBackPressed() {
+        // Check if there are fragments in the back stack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            // If there are fragments in the back stack, pop the fragment
+            getSupportFragmentManager().popBackStack();
+        } else {
+            // If there are no fragments in the back stack, perform default back button behavior
+            super.onBackPressed();
+        }
     }
 
     private void initUI() {

@@ -27,7 +27,7 @@ public class managerAddEmployee extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private EditText editTextName, editTextEmail, editTextPhone, editTextSalary, editTextManagerId;
     private Button btnAddEmployee;
-
+    private Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +49,21 @@ public class managerAddEmployee extends AppCompatActivity {
         btnAddEmployee = findViewById(R.id.btn_AddEmployee);
 
         btnAddEmployee.setOnClickListener(v -> showConfirmationDialog());
+
+        backButton = findViewById(R.id.backButton);
+        // Set up the listener for the back button
+        backButton.setOnClickListener(v->onBackPressed());
+    }
+    @Override
+    public void onBackPressed() {
+        // Check if there are fragments in the back stack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            // If there are fragments in the back stack, pop the fragment
+            getSupportFragmentManager().popBackStack();
+        } else {
+            // If there are no fragments in the back stack, perform default back button behavior
+            super.onBackPressed();
+        }
     }
 
     private void showConfirmationDialog() {

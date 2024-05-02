@@ -28,7 +28,7 @@ public class employeeAddNewVehicle extends AppCompatActivity {
     private Button scanNumberPlateButton, addVehicleButton;
 
     private FirebaseFirestore db;
-
+    private Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +62,21 @@ public class employeeAddNewVehicle extends AppCompatActivity {
         addVehicleButton.setOnClickListener(v -> {
             addVehicleToFirestore();
         });
+
+        backButton = findViewById(R.id.backButton);
+        // Set up the listener for the back button
+        backButton.setOnClickListener(v->onBackPressed());
+    }
+    @Override
+    public void onBackPressed() {
+        // Check if there are fragments in the back stack
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            // If there are fragments in the back stack, pop the fragment
+            getSupportFragmentManager().popBackStack();
+        } else {
+            // If there are no fragments in the back stack, perform default back button behavior
+            super.onBackPressed();
+        }
     }
 
     // Handling the result returned from the scan activity

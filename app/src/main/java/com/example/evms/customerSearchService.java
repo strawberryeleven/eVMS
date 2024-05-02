@@ -138,6 +138,7 @@ public class customerSearchService extends AppCompatActivity {
     private RadioButton radioButtonType;
     private RadioButton radioButtonName;
     EditText editTextSearchQuery;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

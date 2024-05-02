@@ -128,7 +128,7 @@ public class customerHomepage extends AppCompatActivity {
         Intent intent = new Intent(customerHomepage.this, cls);
         intent.putExtra("customerEmail", customerEmail);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     public void getAllPendingService(OnPendingServiceListListener listener) {
