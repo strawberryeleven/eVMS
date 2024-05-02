@@ -147,6 +147,15 @@
         <activity
             android:name=".MakePayment"
             android:exported="false" />
+        <activity
+            android:name=".ShowGatepass"
+            android:exported="false" />
+        <activity
+            android:name=".CreateGatepass"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerServiceFeedback"
+            android:exported="false" />
     </application>
 
 </manifest>

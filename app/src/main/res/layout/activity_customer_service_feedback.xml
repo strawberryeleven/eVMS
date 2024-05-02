@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="@color/background_dark">
+
+    <TextView
+        android:id="@+id/tvCustomerFeedbackLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Customer Feedback"
+        android:textColor="@color/colorOnPrimary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/customerFeedbackInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCustomerFeedbackLabel"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCustomerFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:gravity="top|start"
+            android:minHeight="150dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/serviceRatingInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/customerFeedbackInputLayout"
+        android:layout_marginTop="16dp"
+        android:hint="Service Rating (1-5)">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etServiceRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnSubmitFeedback"
+        android:layout_width="260dp"
+        android:layout_height="68dp"
+        style="@style/Widget.MaterialComponents.Button"
+        android:text="Submit Feedback"
+        android:layout_below="@id/serviceRatingInputLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/colorOnPrimary"
+        android:backgroundTint="@color/button_primary"/>
+
+</RelativeLayout>

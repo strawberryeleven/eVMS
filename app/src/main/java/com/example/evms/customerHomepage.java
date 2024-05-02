@@ -89,18 +89,20 @@ public class customerHomepage extends AppCompatActivity {
 
     private void fetchNotificationCount() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Notification") // Ensure the collection name is correct
+        db.collection("Notification")
                 .whereEqualTo("CustomerEmail", customerEmail)
+                .whereIn("Status", java.util.Arrays.asList("Pending", "Complete"))  // Filter for Pending and Complete statuses
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        final int count = task.getResult().size(); // Count the documents which match the query
+                        int count = task.getResult().size();  // Count the documents which match the query
                         runOnUiThread(() -> {
-                            updateNotificationBadge(count); // Update the notification badge
-                            Toast.makeText(customerHomepage.this, "You have " + count + " notifications", Toast.LENGTH_LONG).show(); // Show the count in a toast
+                            updateNotificationBadge(count);  // Update the notification badge
+                            Toast.makeText(customerHomepage.this, "You have " + count + " notifications", Toast.LENGTH_LONG).show();  // Show the count in a toast
                         });
                     } else {
-                        Log.d("FetchNotifError", "Error getting documents: ", task.getException());
+                        Log.e("FetchNotifError", "Error getting documents: ", task.getException());
+                        Toast.makeText(customerHomepage.this, "Failed to load notifications", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
