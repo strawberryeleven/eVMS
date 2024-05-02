@@ -4,7 +4,42 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".adminManagerReport">
+    tools:context=".adminManagerReport"
+    android:padding="24dp"
+    android:background="@color/background_dark">
+
+    <RelativeLayout
+        android:id="@+id/headingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal"
+            android:text="&lt;"
+            android:padding="1dp"
+            android:textSize="24sp"
+            android:textColor="@color/text_primary"
+            android:backgroundTint="@color/cardview_light_background"
+            android:background="@null"
+            android:onClick="onBackButtonClick" />
+
+        <TextView
+            android:id="@+id/ManagerReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Manager Report"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
     <!-- Label for Y-Axis -->
     <TextView
@@ -16,7 +51,7 @@
         android:textSize="16sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="100dp" />
 
     <!-- BarChart to display manager performance -->
     <com.github.mikephil.charting.charts.BarChart

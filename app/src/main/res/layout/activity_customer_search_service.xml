@@ -62,11 +62,10 @@
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.Button"
         android:layout_alignBaseline="@id/searchInputLayout"
         android:layout_alignParentEnd="true"
         android:text="Search"
-        android:background="@color/button_primary"
+        android:backgroundTint="@color/button_primary"
         android:textColor="@color/colorOnPrimary"
         android:layout_marginStart="8dp"/>
 
@@ -134,8 +133,9 @@
 
     <ImageButton
         android:id="@+id/btnViewFilters"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/rounded_gray_background"
         android:contentDescription="View Filters"
         android:onClick="customerViewVehicles"

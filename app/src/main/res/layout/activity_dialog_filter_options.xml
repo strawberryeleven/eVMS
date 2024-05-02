@@ -1,54 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="24dp">
 
     <!-- Search Query -->
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:hint="Enter Type or Name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextSearchQuery"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Enter Type or Name" />
+            android:textColor="?attr/colorOnSurface" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search By:"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"/>
-
-    </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Radio Group for Type or Name selection -->
     <RadioGroup
         android:id="@+id/radioGroupSearchBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radioButtonType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type" />
+            android:text="Type"
+            android:textColor="?attr/colorOnSurface" />
 
         <RadioButton
             android:id="@+id/radioButtonName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name" />
+            android:text="Name"
+            android:textColor="?attr/colorOnSurface" />
 
     </RadioGroup>
 
@@ -56,10 +48,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="If you want a specific value, keep lower and upper limit same." />
+        android:layout_marginTop="8dp"
+        android:text="If you want a specific value, keep lower and upper limit same."
+        android:textColor="?attr/colorOnSurface" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,22 +58,36 @@
         android:text="Price Range:"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"/>
+        android:textColor="?attr/colorOnSurface" />
 
-    <EditText
-        android:id="@+id/editTextLowerPrice"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Lower Limit"/>
+        android:hint="Lower Limit"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <EditText
-        android:id="@+id/editTextUpperPrice"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextLowerPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorOnSurface" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Upper Limit"/>
+        android:hint="Upper Limit"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextUpperPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorOnSurface" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Rating Range -->
     <TextView
@@ -91,21 +96,35 @@
         android:text="Rating Range:"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"/>
+        android:textColor="?attr/colorOnSurface" />
 
-    <EditText
-        android:id="@+id/editTextLowerRating"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Lower Limit"/>
+        android:hint="Lower Limit"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <EditText
-        android:id="@+id/editTextUpperRating"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextLowerRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorOnSurface" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Upper Limit"/>
+        android:hint="Upper Limit"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextUpperRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorOnSurface" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>

@@ -12,27 +12,13 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp">
 
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_alignParentStart="true"
-            android:gravity="center_horizontal"
-            android:text="&lt;"
-            android:padding="1dp"
-            android:textSize="24sp"
-            android:textColor="@color/text_primary"
-            android:backgroundTint="@color/cardview_light_background"
-            android:background="@null"
-            android:onClick="onBackButtonClick" />
-
         <TextView
             android:id="@+id/text_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="Update Records"
+            android:text="Update Customer Records"
             android:textColor="@color/colorOnPrimary"
             android:textSize="25sp"
             android:textStyle="bold" />
