@@ -26,6 +26,9 @@ public class ManagerHomepage extends AppCompatActivity {
         Button removeEmployeeButton = findViewById(R.id.buttonRemoveEmployee);
         Button reportsButton = findViewById(R.id.buttonReports); // Find the Reports button
 
+        Button logoutButton = findViewById(R.id.buttonLogout);
+        logoutButton.setOnClickListener(v -> finish());  // Logout simply closes the activity
+
         addButton.setOnClickListener(v -> {
             Intent intent = new Intent(ManagerHomepage.this, managerAddEmployee.class);
             startActivity(intent);

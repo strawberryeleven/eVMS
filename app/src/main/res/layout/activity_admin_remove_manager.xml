@@ -130,6 +130,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:backgroundTint="@color/button_primary"
         android:textColor="@color/colorOnPrimary"
+        android:textStyle="bold"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

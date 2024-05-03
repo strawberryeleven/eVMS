@@ -160,7 +160,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Add Button -->
-            <!-- Add Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_AddEmployee"
                 style="@style/Widget.MaterialComponents.Button"
@@ -168,6 +167,7 @@
                 android:layout_height="68dp"
                 android:text="@string/add"
                 android:textColor="@color/colorOnPrimary"
+                android:textStyle="bold"
                 android:backgroundTint="@color/button_primary"
                 android:padding="16dp"
                 android:layout_marginStart="35dp"

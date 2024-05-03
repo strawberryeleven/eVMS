@@ -67,11 +67,13 @@ public class customerHomepage extends AppCompatActivity {
         });
 
         Button searchButton = findViewById(R.id.button3);
-        Button testButton = findViewById(R.id.btn_testEmail);
         Button historyButton = findViewById(R.id.btnViewHistory);
+        Button logoutButton = findViewById(R.id.buttonLogout);
+        logoutButton.setOnClickListener(v -> finish());  // Logout simply closes the activity
+
         ImageButton viewVehiclesButton = findViewById(R.id.btnViewVehicles); // ImageButton
 
-        setupButtonListeners(searchButton, testButton, historyButton, viewVehiclesButton);
+        setupButtonListeners(searchButton, historyButton, viewVehiclesButton);
 
         serviceNameTextView = findViewById(R.id.tvServiceName);
         servicePriceTextView = findViewById(R.id.tvServicePrice);
@@ -117,9 +119,8 @@ public class customerHomepage extends AppCompatActivity {
         }
     }
 
-    private void setupButtonListeners(Button searchButton, Button testButton, Button historyButton, ImageButton viewVehiclesButton) {
+    private void setupButtonListeners(Button searchButton, Button historyButton, ImageButton viewVehiclesButton) {
         searchButton.setOnClickListener(v -> navigateTo(customerSearchService.class));
-        testButton.setOnClickListener(v -> navigateTo(testEmailPage.class));
         historyButton.setOnClickListener(v -> navigateTo(customerViewHistory.class));
         viewVehiclesButton.setOnClickListener(v -> navigateTo(customerViewVehicles.class));
     }

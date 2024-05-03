@@ -9,7 +9,6 @@
     tools:context=".registerCustomer"
     android:padding="24dp">
 
-
     <!-- Heading -->
     <RelativeLayout
         android:id="@+id/headingLayout"
@@ -160,14 +159,16 @@
     </com.google.android.material.card.MaterialCardView>
 
     <!-- Register Button -->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
-        android:text="@string/sign_up"
-        android:textColor="@color/colorOnSecondary"
+        android:text="SIGN_UP"
+        android:textColor="@color/text_secondary"
+        android:textStyle="bold"
         android:backgroundTint="@color/button_primary"
         app:layout_constraintTop_toBottomOf="@id/cardView"
         app:layout_constraintStart_toStartOf="parent"

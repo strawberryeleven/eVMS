@@ -27,6 +27,8 @@ public class EmployeeHomepage extends AppCompatActivity {
         Button btnUpdateCustomerRecords = findViewById(R.id.btnUpdateCustomerRecords);
         Button btnUpdateServiceRecords = findViewById(R.id.btnUpdateServiceRecords);
         Button btnGenerateGatePass = findViewById(R.id.btnGenerateGatePass);
+        Button logoutButton = findViewById(R.id.btnLogOut);
+        logoutButton.setOnClickListener(v -> finish());  // Logout simply closes the activity
 
 
         Bundle extras = getIntent().getExtras();

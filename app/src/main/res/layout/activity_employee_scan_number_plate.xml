@@ -66,6 +66,7 @@
         android:backgroundTint="@color/button_primary"
         android:padding="16dp"
         app:cornerRadius="20dp"
+        android:textStyle="bold"
         android:text="CAPTURE IMAGE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
