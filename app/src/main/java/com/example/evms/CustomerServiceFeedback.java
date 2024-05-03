@@ -50,6 +50,24 @@ public class CustomerServiceFeedback extends AppCompatActivity {
             return;
         }
 
+        // Feedback validation: should not exceed 50 characters
+        if (feedback.length() > 50) {
+            Toast.makeText(getApplicationContext(), "Feedback must not exceed 50 characters.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Rating validation: should be a numeric value between 1 and 5
+        try {
+            int ratingValue = Integer.parseInt(rating);
+            if (ratingValue < 1 || ratingValue > 5) {
+                Toast.makeText(getApplicationContext(), "Rating must be between 1 and 5.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(getApplicationContext(), "Invalid rating format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         updateServiceHistory(serviceId, serviceDate, numberPlate, rating);
         saveFeedback(customerEmail, feedback, serviceId, serviceDate, numberPlate);
 

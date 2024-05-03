@@ -108,6 +108,36 @@ public class employeeAddNewVehicle extends AppCompatActivity {
         String colorText = vehicleColor.getText().toString();
         String numberPlateText = numberPlate.getText().toString();
 
+        // Customer Email validation: should follow proper email syntax
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(customerEmailText).matches()) {
+            Toast.makeText(getApplicationContext(), "Enter a valid email address.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Vehicle Model validation: should not contain numbers
+        if (!modelText.matches("[a-zA-Z ]+")) {
+            Toast.makeText(getApplicationContext(), "Vehicle model must not include numbers.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Kilometers Driven validation: should be a numeric value
+        try {
+            double kms = Double.parseDouble(kmsDrivenText);
+            if (kms <= 0) {
+                Toast.makeText(getApplicationContext(), "Kilometers driven cannot be negative.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(getApplicationContext(), "Invalid format for kilometers driven.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Vehicle Color validation: should not contain numbers
+        if (!colorText.matches("[a-zA-Z ]+")) {
+            Toast.makeText(getApplicationContext(), "Vehicle color must not include numbers.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (!customerEmailText.isEmpty() && !modelText.isEmpty() && !kmsDrivenText.isEmpty() && !colorText.isEmpty() && !numberPlateText.isEmpty()) {
             // Using HashMap to ensure proper field names
             Map<String, Object> vehicle = new HashMap<>();

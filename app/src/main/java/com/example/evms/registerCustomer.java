@@ -60,6 +60,29 @@ public class registerCustomer extends AppCompatActivity {
         String password = passwordField.getText().toString().trim();
         String phone = phoneField.getText().toString().trim();
 
+        // Name validation: should not contain numbers
+        if (!name.matches("[^0-9]+")) {
+            Toast.makeText(getApplicationContext(), "Name must not include numbers.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(getApplicationContext(), "Enter a valid email address.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Password validation: should be at least 8 characters
+        if (password.length() < 8) {
+            Toast.makeText(getApplicationContext(), "Password must be at least 8 characters.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Phone validation: should only contain numbers and be exactly 11 characters long
+        if (!phone.matches("\\d{11}")) {
+            Toast.makeText(getApplicationContext(), "Phone must be exactly 11 digits.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (name.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty()) {
             Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
             return;

@@ -202,6 +202,15 @@ public class UpdateCustomerRecords extends AppCompatActivity {
             Toast.makeText(UpdateCustomerRecords.this, "Invalid phone number format", Toast.LENGTH_SHORT).show();
             return false;
         }
+        if (!etName.getText().toString().matches("[^0-9]+")) {
+            Toast.makeText(getApplicationContext(), "Name must not include numbers.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (etPassword.getText().toString().length() < 8) {
+            Toast.makeText(getApplicationContext(), "Password must be at least 8 characters.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         return true;
     }
 

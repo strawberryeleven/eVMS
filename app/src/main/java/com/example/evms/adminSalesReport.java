@@ -3,6 +3,7 @@ package com.example.evms;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.github.mikephil.charting.charts.LineChart;
@@ -36,6 +37,9 @@ public class adminSalesReport extends AppCompatActivity {
         lineChart = findViewById(R.id.managerSalesLineChart);
         setupChartBasics();
         fetchSalesData();  // Asynchronously fetch data and setup chart in its callback
+
+        Toast.makeText(this, "Please Rotate Your Screen", Toast.LENGTH_SHORT).show();
+
 
         backButton = findViewById(R.id.backButton);
         // Set up the listener for the back button

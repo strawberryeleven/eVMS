@@ -165,6 +165,36 @@ public class managerAddEmployee extends AppCompatActivity {
         String salary = editTextSalary.getText().toString().trim();
         String managerId = editTextManagerId.getText().toString().trim();
 
+        // Name validation: should not contain numbers
+        if (!name.matches("[^0-9]+")) {
+            Toast.makeText(getApplicationContext(), "Name must not include numbers.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Email validation: should follow proper email syntax
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(getApplicationContext(), "Enter a valid email address.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Phone validation: should only contain numbers and be exactly 11 digits long
+        if (!phone.matches("\\d{11}")) {
+            Toast.makeText(getApplicationContext(), "Phone must be exactly 11 digits long.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Salary validation: should be a valid number
+        try {
+            double salaryValue = Double.parseDouble(salary);
+            if (salaryValue <= 0) {
+                Toast.makeText(getApplicationContext(), "Salary must be greater than zero.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(getApplicationContext(), "Invalid salary format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Map<String, Object> employee = new HashMap<>();
         employee.put("EmployeeID", employeeId);
         employee.put("ManagedBy", managerId);

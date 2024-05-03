@@ -26,7 +26,12 @@ public class ProcessPayment {
         if (expMonth == null || Integer.parseInt(expMonth) < 1 || Integer.parseInt(expMonth) > 12) {
             return "Invalid expiration month. Enter a valid month (01-12).";
         }
-        if (expYear == null || Integer.parseInt(expYear) < 2021) { // Adjust year validation based on current year
+
+        if (Integer.parseInt(expMonth) < 5 && Integer.parseInt(expYear) == 2024) {
+            return "Invalid expiration month.";
+        }
+
+        if (expYear == null || Integer.parseInt(expYear) < 2024) { // Adjust year validation based on current year
             return "Invalid expiration year. Enter a valid year.";
         }
         return "";  // No validation errors

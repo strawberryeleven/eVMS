@@ -177,6 +177,36 @@ public class adminAddService extends AppCompatActivity {
             return;
         }
 
+        // Service Name validation: should not contain numbers
+        if (!serviceName.matches("[^0-9]+")) {
+            Toast.makeText(getApplicationContext(), "Service Name must not include numbers.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Service Type validation: should not contain numbers
+        if (!serviceType.matches("[^0-9]+")) {
+            Toast.makeText(getApplicationContext(), "Service Type must not include numbers.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Service Description validation: should not be longer than 50 characters
+        if (serviceDescription.length() > 50) {
+            Toast.makeText(getApplicationContext(), "Service Description must not exceed 50 characters.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Service Price validation: should not be less than 100
+        try {
+            double price = Double.parseDouble(servicePrice);
+            if (price < 100) {
+                Toast.makeText(getApplicationContext(), "Service Price must be at least 100.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(getApplicationContext(), "Invalid Service Price format.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Create a map to store service details
         Map<String, Object> service = new HashMap<>();
         service.put("ServiceID", serviceId);

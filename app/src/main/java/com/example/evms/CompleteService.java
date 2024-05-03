@@ -99,6 +99,12 @@ public class CompleteService extends AppCompatActivity {
             return;
         }
 
+        // Remarks validation: should not be longer than 50 characters
+        if (remarks.length() > 50) {
+            Toast.makeText(getApplicationContext(), "Remarks must not exceed 50 characters.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Map<String, Object> serviceHistoryEntry = new HashMap<>();
         serviceHistoryEntry.put("CustomerEmail", customerEmail);
         serviceHistoryEntry.put("ServiceID", serviceId);
