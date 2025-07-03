@@ -6,6 +6,18 @@ eVMS (Electronic Vehicle Maintenance System) is an Android application designed 
 
 ---
 
+## Table of Contents
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [System Requirements](#system-requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Test Credentials](#test-credentials)
+- [Notes](#notes)
+- [License](#license)
+
+---
+
 ## Features
 
 - **Multi-role Login:** Separate login for Admin, Manager, Employee, and Customer.
@@ -102,4 +114,4 @@ flowchart TD
 ---
 
 ## License
-This project is for educational purposes. For production use, ensure compliance with all third-party library licenses. 
+This project is for educational purposes. For production use, ensure compliance with all third-party library licenses.
