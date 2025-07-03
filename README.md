@@ -10,9 +10,9 @@ eVMS (Electronic Vehicle Maintenance System) is an Android application designed 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [System Requirements](#system-requirements)
-- [Installation](#installation)
+- [Setting up the Development Environment](#setting-up-the-development-environment)
 - [Usage](#usage)
-- [Test Credentials](#test-credentials)
+- [Number Plate Recognition Feature](#number-plate-recognition-feature)
 - [Notes](#notes)
 - [License](#license)
 
@@ -33,6 +33,17 @@ eVMS (Electronic Vehicle Maintenance System) is an Android application designed 
 
 ---
 
+## Technologies Used
+- Java (Android)
+- Android SDK
+- Firebase (Firestore, Storage)
+- Google Mobile Vision (TextRecognizer)
+- uCrop (Image cropping)
+- Picasso (Image loading)
+- Material Design Components
+
+---
+
 ## System Requirements
 
 - **Android Studio** (latest version recommended)
@@ -45,61 +56,35 @@ eVMS (Electronic Vehicle Maintenance System) is an Android application designed 
 
 ## Setting up the Development Environment
 
-### 1. Download and Install Android Studio
-- Visit [Android Studio Download](https://developer.android.com/studio) and download the latest version.
-- Follow the installation instructions for your OS.
-
-### 2. Install Android SDK
-- Open Android Studio and complete the setup wizard to install the required SDKs.
-
-### 3. Open the Project
-- Launch Android Studio.
-- Select **Open an Existing Project** and navigate to the project folder.
-- Click **OK** to load the project.
+1. **Download and Install Android Studio**
+   - Visit [Android Studio Download](https://developer.android.com/studio) and download the latest version.
+   - Follow the installation instructions for your OS.
+2. **Install Android SDK**
+   - Open Android Studio and complete the setup wizard to install the required SDKs.
+3. **Open the Project**
+   - Launch Android Studio.
+   - Select **Open an Existing Project** and navigate to the project folder.
+   - Click **OK** to load the project.
 
 ---
 
-## Compiling/Building the Project
+## Usage
 
+### Building and Running
 - In Android Studio, select **Build > Make Project** to compile and resolve dependencies.
 - Fix any build errors (ensure all dependencies in `build.gradle` are available).
 
----
-
-## Running the Application
-
-### On a Real Device
+### Running on a Real Device
 - Enable USB debugging (Settings > About phone > Tap Build number 7 times > Developer options > Enable USB debugging).
 - Connect your device via USB.
 - In device settings, search for **USB configuration** and set it to **File Transfer**.
 - Select your device in Android Studio and click **Run**.
 
-### On an Emulator
+### Running on an Emulator
 - Set up an Android Virtual Device (AVD) in Android Studio.
 - Click **Run** to launch the app on the emulator.
 
----
-
-## Number Plate Recognition Feature
-
-eVMS includes a built-in number plate recognition system:
-- Employees can capture a vehicle's number plate using the device camera.
-- The app uses Google Mobile Vision's `TextRecognizer` to extract text from the image.
-- Extracted text is processed with regex to match standard number plate formats (e.g., ABC-1234).
-- Common OCR errors (like 'O' for '0') are auto-corrected.
-- The recognized plate is used to auto-fill vehicle details or validate entries.
-
----
-
-## Notes
-- Ensure you have the latest Android Studio and SDK updates.
-- The app requires Android 9.0 (API 28) or higher.
-- Use a device with an active internet connection for full functionality.
-- For best experience, use dark theme on your phone.
-
----
-
-## Setup & Usage Flow
+### Setup & Usage Flow
 
 ```mermaid
 flowchart TD
@@ -113,5 +98,25 @@ flowchart TD
 
 ---
 
+## Number Plate Recognition Feature
+
+eVMS includes a built-in number plate recognition system:
+- Employees can capture a vehicle's number plate using the device camera.
+- The app uses Google Mobile Vision's `TextRecognizer` to extract text from the image.
+- Extracted text is processed with regex to match standard number plate formats (e.g., ABC-1234).
+- Common OCR errors (like 'O' for '0') are auto-corrected.
+- The recognized plate is used to auto-fill vehicle details or validate entries.
+
+
+---
+
+## Notes
+- Ensure you have the latest Android Studio and SDK updates.
+- The app requires Android 9.0 (API 28) or higher.
+- Use a device with an active internet connection for full functionality.
+- For best experience, use dark theme on your phone.
+
+---
+
 ## License
-This project is for educational purposes. For production use, ensure compliance with all third-party library licenses.
+This project is for educational purposes only. For production use, ensure compliance with all third-party library licenses.
