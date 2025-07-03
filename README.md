@@ -121,8 +121,6 @@ eVMS includes a built-in number plate recognition system:
 
 ## Acknowledgments
 
-This project was developed as part of an academic software engineering course at FAST-NUCES under the supervision of **Dr. Ali Afzal Malik**.
-
 **Team Members:**
 - Ahmad Wyne  
 - Abdur Rehman  
