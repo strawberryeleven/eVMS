@@ -1,4 +1,4 @@
-# Vehicle Maintenance System (eVMS)
+# Electronic Vehicle Maintenance System (eVMS)
 
 ## Overview
 
@@ -15,6 +15,7 @@ eVMS (Electronic Vehicle Maintenance System) is an Android application designed 
 - [Number Plate Recognition Feature](#number-plate-recognition-feature)
 - [Notes](#notes)
 - [License](#license)
+- [Acknowledgments](#acknowledgments)
 
 ---
 
@@ -115,6 +116,21 @@ eVMS includes a built-in number plate recognition system:
 - The app requires Android 9.0 (API 28) or higher.
 - Use a device with an active internet connection for full functionality.
 - For best experience, use dark theme on your phone.
+
+---
+
+## Acknowledgments
+
+This project was developed as part of an academic software engineering course at FAST-NUCES under the supervision of **Dr. Ali Afzal Malik**.
+
+**Team Members:**
+- Ahmad Wyne  
+- Abdur Rehman  
+- Hassan Yousaf  
+- Ibrahim Gul  
+- Muhammad Ibrahim (me)
+
+We worked collaboratively, dividing responsibilities across features and UI/UX modules, and tackled technical challenges like OCR and Firebase integration together.
 
 ---
 
