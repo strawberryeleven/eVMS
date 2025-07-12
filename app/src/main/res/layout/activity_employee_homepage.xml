@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EmployeeHomepage"
+    android:padding="24dp"
+    android:background="@color/background_dark">
+
+    <TextView
+        android:id="@+id/tvEmployeeDashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/background_dark"
+        android:textColor="@color/text_secondary"
+        android:padding="16dp"
+        android:text="Employee Dashboard"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Update Customer Records Button -->
+    <Button
+        android:id="@+id/btnUpdateCustomerRecords"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:backgroundTint="@color/button_primary"
+        android:textColor="@color/colorOnPrimary"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:text="UPDATE CUSTOMER RECORDS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmployeeDashboard" />
+
+    <!-- Update Service Records Button -->
+    <Button
+        android:id="@+id/btnUpdateServiceRecords"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:backgroundTint="@color/button_primary"
+        android:textColor="@color/colorOnPrimary"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:text="UPDATE SERVICE RECORDS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdateCustomerRecords" />
+
+    <!-- Generate Gate Pass Button -->
+    <Button
+        android:id="@+id/btnGenerateGatePass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:backgroundTint="@color/button_primary"
+        android:textColor="@color/colorOnPrimary"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:text="GENERATE GATE PASS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdateServiceRecords" />
+
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:backgroundTint="@color/colorDanger"
+        android:textColor="@color/colorOnPrimary"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:text="LOGOUT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGenerateGatePass" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

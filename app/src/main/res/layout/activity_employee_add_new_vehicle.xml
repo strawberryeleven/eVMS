@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark">
+
+    <!-- Heading Layout -->
+    <RelativeLayout
+        android:id="@+id/headingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:layout_marginTop="24dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal"
+            android:text="&lt;"
+            android:padding="1dp"
+            android:textSize="24sp"
+            android:textColor="@color/text_primary"
+            android:backgroundTint="@color/cardview_light_background"
+            android:background="@null"
+            android:onClick="onBackButtonClick" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Add Vehicle"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- Scan Number Plate Button -->
+    <Button
+        android:id="@+id/scanNumberPlateButton"
+        android:textColor="@color/colorOnPrimary"
+        android:backgroundTint="@color/button_primary"
+        android:layout_below="@id/headingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:textStyle="bold"
+        android:text="SCAN VEHICLE NUMBER PLATE"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp" />
+
+    <!-- Display Number Plate -->
+    <TextView
+        android:id="@+id/displayNumberPlate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scanNumberPlateButton"
+        android:text="Number Plate"
+        android:textAlignment="center"
+        android:background="@color/background_dark"
+        android:padding="8dp"
+        android:textColor="@color/colorOnPrimary"
+        android:layout_marginTop="16dp"
+        android:editable="false"/>
+
+    <!-- Email Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/displayNumberPlate"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        style="@style/RoundedTextInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Customer Email"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Vehicle Model Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/vehicleModelInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emailInputLayout"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        style="@style/RoundedTextInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/vehicleModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Vehicle Model" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Kms Driven Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/kmsDrivenInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/vehicleModelInputLayout"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        style="@style/RoundedTextInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/kmsDriven"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Kms Driven"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Vehicle Color Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/vehicleColorInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/kmsDrivenInputLayout"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        style="@style/RoundedTextInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/vehicleColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Vehicle Color" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Add Vehicle Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addVehicleButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:textColor="@color/colorOnPrimary"
+        android:backgroundTint="@color/button_primary"
+        android:text="ADD VEHICLE"
+        android:textStyle="bold"
+        android:layout_below="@id/vehicleColorInputLayout"
+        android:layout_marginTop="25dp"
+        app:cornerRadius="20dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp" />
+
+</RelativeLayout>

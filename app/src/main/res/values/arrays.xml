@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="price_options">
+        <item>0-500</item>
+        <item>500-1000</item>
+        <item>1000-5000</item>
+        <item>5000-20000</item>
+        <item>20000+</item>
+    </string-array>
+    <string-array name="rating_options">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="tag_options">
+        <item>Tag 1</item>
+        <item>Tag 2</item>
+        <item>Tag 3</item>
+    </string-array>
+    <string-array name="customer_fields">
+        <item>CustomerID</item>
+        <item>Email</item>
+        <item>Name</item>
+        <item>Password</item>
+        <item>PhoneNumber</item>
+    </string-array>
+</resources>

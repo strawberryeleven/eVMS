@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    tools:context=".launchPage">
+
+    <!-- eVMS Heading -->
+    <TextView
+        android:id="@+id/text_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="eVMS"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="60dp"/>
+
+    <TextView
+        android:id="@+id/subheading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Electronic Vehicle Maintenance System"
+        android:textSize="18sp"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintTop_toBottomOf="@id/text_app_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_admin"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="61dp"
+        android:backgroundTint="@color/button_primary"
+        android:padding="16dp"
+        android:text="@string/login_as_admin"
+        android:textColor="@color/colorOnPrimary"
+        android:textStyle="bold"
+        app:cornerRadius="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_manager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_app_name" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_manager"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/login_as_manager"
+        android:textColor="@color/colorOnPrimary"
+        android:textStyle="bold"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_admin"
+        app:layout_constraintBottom_toTopOf="@id/btn_employee"
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="61dp"
+        android:backgroundTint="@color/button_primary"
+        app:cornerRadius="20dp"/>
+
+    <!-- Employee Login Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_employee"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/login_as_employee"
+        android:textColor="@color/colorOnPrimary"
+        android:textStyle="bold"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_manager"
+        app:layout_constraintBottom_toTopOf="@id/btn_customer"
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="61dp"
+        android:backgroundTint="@color/button_primary"
+        app:cornerRadius="20dp"/>
+
+    <!-- Customer Login Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_customer"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/login_as_customer"
+        android:textColor="@color/colorOnPrimary"
+        android:textStyle="bold"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_employee"
+        app:layout_constraintBottom_toTopOf="@id/btn_reg_customer"
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="61dp"
+        android:backgroundTint="@color/button_primary"
+        app:cornerRadius="20dp"/>
+
+    <!-- Register as Customer Text -->
+    <TextView
+        android:id="@+id/btn_reg_customer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_here_register_as_customer"
+        android:textColor="@color/colorSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_customer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_dark"
+    tools:context=".managerRemoveEmployee"
+    android:padding="24dp">
+
+    <!-- Heading: Remove Employee -->
+    <RelativeLayout
+        android:id="@+id/removeEmployeeHeadingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/text_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remove Employee"
+            android:textColor="@color/text_secondary"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"/>
+
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignBaseline="@id/text_heading"
+            android:backgroundTint="@color/cardview_light_background"
+            android:gravity="center"
+            android:onClick="onBackButtonClick"
+            android:padding="1dp"
+            android:text="&lt;"
+            android:textColor="@color/text_primary"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
+
+    <!-- Header Layout -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_below="@id/removeEmployeeHeadingLayout">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Employee ID"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Name"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Salary"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Employee Rating"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- RecyclerView for displaying list of managers -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewRemoveEmployee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerLayout"
+        android:layout_marginTop="1dp" />
+
+    <RelativeLayout
+        android:id="@+id/employeeIdLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentBottom="true"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="24dp">
+
+        <!-- TextInputLayout for Employee ID -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/employeeIdTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/RoundedTextInputLayout"
+            android:hint="Enter Employee ID">
+
+
+            <!-- TextInputEditText for Employee ID -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextEmployeeID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Button to Remove Employee -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonRemoveEmployee"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="35dp"
+            app:cornerRadius="20dp"
+            android:textStyle="bold"
+            android:text="REMOVE"
+            android:layout_below="@id/employeeIdTextInputLayout"
+            android:backgroundTint="@color/button_primary"
+            android:textColor="@color/colorOnPrimary" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

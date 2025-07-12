@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/card_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- TextView for Service Name -->
+        <TextView
+            android:id="@+id/serviceName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/text_secondary" />
+
+        <!-- Spacer View -->
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent" />
+
+        <!-- TextView for Service Type -->
+        <TextView
+            android:id="@+id/serviceType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="right"
+            android:textSize="16sp"
+            android:textColor="@color/text_secondary" />
+
+        <!-- Spacer View -->
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="7dp"/>
+
+        <!-- TextView for Price -->
+        <TextView
+            android:id="@+id/servicePrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:textSize="16sp"
+            android:textColor="@color/text_secondary" />
+
+        <!-- Spacer View -->
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"/>
+
+        <!-- TextView for Rating -->
+        <TextView
+            android:id="@+id/serviceRating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingRight="6dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_secondary" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

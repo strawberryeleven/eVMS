@@ -41,9 +41,28 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.google.firebase:firebase-storage")
+
+    implementation ("com.squareup.picasso:picasso:2.71828")
+
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
     implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
 
     implementation("com.google.firebase:firebase-analytics")
 
     implementation ("com.google.firebase:firebase-firestore:24.10.0")
+
+    implementation ("com.github.esafirm:android-image-picker:2.4.5")
+
+    implementation ("com.google.firebase:firebase-database:20.0.3") // Use the latest version available
+
+    implementation ("com.google.android.gms:play-services-vision:19.0.0")
+
+    implementation ("com.github.yalantis:ucrop:2.2.8-native")
+
+    implementation ("androidx.appcompat:appcompat:1.4.1")
+
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
 }

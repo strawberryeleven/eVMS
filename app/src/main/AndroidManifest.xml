@@ -1,19 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EVMS"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".managerReports"
+            android:exported="false" />
+        <activity
+            android:name=".customerViewPendingServices"
+            android:exported="false" />
+        <activity
+            android:name=".adminEmployeeReport"
+            android:exported="false" />
+        <activity
+            android:name=".adminManagerReport"
+            android:exported="false" />
+        <activity
+            android:name=".adminServiceReport"
+            android:exported="false" />
+        <activity
+            android:name=".adminSalesReport"
+            android:exported="false" />
+        <activity
+            android:name=".adminReports"
+            android:exported="false" />
+        <activity
+            android:name=".employeeAddNewVehicle"
+            android:exported="false" />
+        <activity
+            android:name=".managerRemoveEmployee"
+            android:exported="false" />
+        <activity
+            android:name=".customerViewVehicles"
+            android:exported="false" />
+        <activity
+            android:name=".customerViewHistory"
+            android:exported="false" />
+        <activity
+            android:name=".customerViewHstory"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".adminRemoveManager"
+            android:exported="false" />
+        <activity
+            android:name=".adminAddService"
+            android:exported="false" />
+        <activity
+            android:name=".testEmailPage"
+            android:exported="false" />
+        <activity
+            android:name=".customerSearchService"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".adminAppointManager"
+            android:exported="false" />
+        <activity
+            android:name=".customerHomepage"
+            android:exported="false" />
+        <activity
+            android:name=".employeeScanNumberPlate"
+            android:exported="false" />
+        <activity
+            android:name=".managerAddEmployee"
+            android:exported="false" />
+        <activity
+            android:name=".EmployeeHomepage"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateCustomerRecords"
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".UpdateServiceRecords"
+            android:exported="false" />
+        <activity
+            android:name=".CompleteService"
+            android:exported="false" />
+        <activity
+            android:name=".ManagerHomepage"
+            android:exported="false" />
+        <activity
+            android:name=".adminHomepage"
+            android:exported="false" />
+        <activity
+            android:name=".registerCustomer"
+            android:exported="false" />
+        <activity
+            android:name=".loginCustomer"
+            android:exported="false" />
+        <activity
+            android:name=".loginEmployee"
+            android:exported="false" />
+        <activity
+            android:name=".loginManager"
+            android:exported="false" />
+        <activity
+            android:name=".loginAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".launchPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +137,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".CustomerNotificationPanel"
+            android:exported="false" />
+        <activity
+            android:name=".MakePayment"
+            android:exported="false" />
+        <activity
+            android:name=".ShowGatepass"
+            android:exported="false" />
+        <activity
+            android:name=".CreateGatepass"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerServiceFeedback"
+            android:exported="false" />
     </application>
 
 </manifest>
